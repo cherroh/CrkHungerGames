@@ -46,11 +46,15 @@ function Bloodbath(): React.ReactElement {
         // Update health of the killed cookie
         randomCookieKilled.health -= randomCookieKiller.damage;
     
+        let duelResult = `${randomCookieKiller.name} stabbed ${randomCookieKilled.name} cookie`;
+    
         // Check if the killed cookie is still alive
         if (randomCookieKilled.health <= 0) {
             randomCookieKilled.isAlive = false;
             // Remove the killed cookie from the array if they are not alive
             cookieArray.splice(randomIndexKilled, 1);
+            // Add information if the cookie died
+            duelResult += `, ${randomCookieKilled.name} cookie died`;
         }
     
         // Store the duel result in state
@@ -59,7 +63,7 @@ function Bloodbath(): React.ReactElement {
             {
                 killer: randomCookieKiller.picture,
                 killed: randomCookieKilled.picture,
-                duelResult: `${randomCookieKiller.name} stabbed ${randomCookieKilled.name} cookie`
+                duelResult: duelResult
             }
         ]);
     
