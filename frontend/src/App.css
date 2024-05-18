@@ -28,13 +28,9 @@ img.logo {
 }
 
 .reset-button {
-  display: block; /* Make the button a block element */
-  margin: 10px 0; /* Add some vertical margin */
-  clear: left; /* Ensure it clears the floating elements */
-  float: left;
-  position: relative;
-  left: 48px;
-  top: 0px;
+  position: absolute;
+  left: 55px;
+  top: 200px;
   background: #232323;
   color: #ffcf27;
   border-top: 1px solid #fff;
@@ -76,7 +72,9 @@ img.logo {
 
 .proceed-button {
   display: block;
-  margin: 10px auto; /* Center the button horizontally and add some vertical margin */
+  margin-left: 455px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   text-align: center;
   border: 1px solid #fff;
   width: 80px;
