@@ -16,7 +16,7 @@ function Bloodbath(): React.ReactElement {
     }
 
     function selectEvent() {
-        const randomEvent = Math.floor(Math.random() * 1 + 1);
+        const randomEvent = Math.floor(Math.random() * 2 + 1);
 
         switch (randomEvent) {
             case 1:
@@ -71,7 +71,19 @@ function Bloodbath(): React.ReactElement {
     }    
 
     function grabWeapon() {
-        alert("what are you doing");
+        // Select a random cookie from the array
+        const randomIndex = Math.floor(Math.random() * cookieArray.length);
+        const randomCookie = cookieArray[randomIndex];
+    
+        // Add 50 to the damage property of the selected cookie
+        randomCookie.damage += 50;
+    
+        // Update the cookie array in the state
+        setCookieArray(prevCookies => {
+            const updatedCookies = [...prevCookies];
+            updatedCookies[randomIndex] = randomCookie;
+            return updatedCookies;
+        });
     }
 
     return (
