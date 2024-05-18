@@ -9,4 +9,31 @@ img.logo {
   height: 175px;
   width: 175px;
   border: 1px solid #000000;
+  float: left; /* Ensure the image floats to the left */
+  margin-right: 20px; /* Add some space between the image and the content */
+  margin-bottom: 20px; /* Add vertical space between the image and the button */
 }
+
+.headerlabel {
+    text-align: center;
+    border: 1px solid #fff;
+    background: #232323;
+    margin-left: 70px;
+    margin-right: auto;
+    color: #ffcf27;
+    display: inline-block;
+    padding: 5px;
+    margin-top: 20px; /* Reduce space between text and top edge of the box */
+    margin-bottom: 20px; /* Reduce space between text and bottom edge of the box */
+}
+
+.reset-button {
+  display: block; /* Make the button a block element */
+  margin: 10px 0; /* Add some vertical margin */
+  clear: left; /* Ensure it clears the floating elements */
+}
+
+.content {
+  margin-left: 200px;
+}
+
