@@ -34,18 +34,26 @@ function Bloodbath(): React.ReactElement {
     function duel() {
         let randomIndexKilled = Math.floor(Math.random() * cookieArray.length);
         let randomCookieKilled = cookieArray[randomIndexKilled];
-
+    
         let randomIndexKiller;
         let randomCookieKiller;
-
+    
         do {
             randomIndexKiller = Math.floor(Math.random() * cookieArray.length);
             randomCookieKiller = cookieArray[randomIndexKiller];
         } while (randomCookieKilled === randomCookieKiller);
-
-        randomCookieKilled.isAlive = false;
-        cookieArray.splice(randomIndexKilled, 1);
-
+    
+        // Update health of the killed cookie
+        randomCookieKilled.health -= randomCookieKiller.damage;
+    
+        // Check if the killed cookie is still alive
+        if (randomCookieKilled.health <= 0) {
+            randomCookieKilled.isAlive = false;
+            // Remove the killed cookie from the array if they are not alive
+            cookieArray.splice(randomIndexKilled, 1);
+        }
+    
+        // Store the duel result in state
         setOutput(prevResults => [
             ...prevResults,
             {
@@ -54,9 +62,9 @@ function Bloodbath(): React.ReactElement {
                 duelResult: `${randomCookieKiller.name} stabbed ${randomCookieKilled.name} cookie`
             }
         ]);
-
+    
         setCookieArray([...cookieArray]);
-    }
+    }    
 
     function grabWeapon() {
         alert("what are you doing");
