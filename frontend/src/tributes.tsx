@@ -24,14 +24,14 @@ const cookie: CookieType[] = [
         picture: "https://i.imgur.com/PA88jOy.png",
     },
     {
-        name: "Tea Knight",
+        name: "Tea Knight1",
         isAlive: true,
         health: 200,
         damage: 50,
         picture: "https://i.imgur.com/58UTRKP.png",
     },
     {
-        name: "Tea Knight",
+        name: "Tea Knight2",
         isAlive: true,
         health: 200,
         damage: 50,

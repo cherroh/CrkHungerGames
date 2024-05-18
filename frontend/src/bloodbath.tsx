@@ -1,6 +1,7 @@
 // bloodbath.tsx
 import React from 'react';
 import './App.css';
+import cookie from './tributes.tsx';
 
 function Bloodbath(): React.ReactElement {
     return (
