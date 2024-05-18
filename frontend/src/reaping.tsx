@@ -7,16 +7,16 @@ function Reaping(): React.ReactElement {
     <div className="reaping">
       <table>
         <tbody>
-          {cookie.map(function (cookie, index) {
-            return (
-              <tr key={index}>
-                <td>
-                  <img src={cookie.picture} alt={cookie.name} className="tribute-image" />
-                  <p>{cookie.name}</p>
+          {[0, 6, 12, 18].map((start, rowIndex) => (
+            <tr key={rowIndex}>
+              {cookie.slice(start, start + 6).map((cookieObj, cellIndex) => (
+                <td key={cellIndex}>
+                  <img src={cookieObj.picture} alt={cookieObj.name} className="tribute-image" />
+                  <p>{cookieObj.name}</p>
                 </td>
-              </tr>
-            );
-          })}
+              ))}
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
