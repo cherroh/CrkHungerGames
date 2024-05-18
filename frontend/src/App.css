@@ -18,7 +18,7 @@ img.logo {
   text-align: center;
   border: 1px solid #fff;
   background: #232323;
-  margin-left: 70px;
+  margin-left: 207px;
   margin-right: auto;
   color: #ffcf27;
   display: inline-block;
@@ -31,19 +31,18 @@ img.logo {
   display: block; /* Make the button a block element */
   margin: 10px 0; /* Add some vertical margin */
   clear: left; /* Ensure it clears the floating elements */
-  text-align: center;
-  border-top: 1px solid #fff;
-  border-left: 1px solid #fff;
-  border-right: 1px solid #fff;
-  border-bottom: 1px solid #fff;
   float: left;
-  width: 80px;
   position: relative;
   left: 48px;
   top: 0px;
   background: #232323;
-  clear: left;
   color: #ffcf27;
+  border-top: 1px solid #fff;
+  border-left: 1px solid #fff;
+  border-right: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  text-align: center;
+  width: 80px;
 }
 
 .content {
@@ -53,7 +52,7 @@ img.logo {
 .tribute-image {
   height: 90px;
   width: 90px;
-  border: 1px solid #000;
+  /*border: 1px solid #000;*/
 }
 
 .reaping table {
@@ -61,8 +60,26 @@ img.logo {
 }
 
 .reaping td {
-  border: 1px solid #000;
+  /*border: 1px solid #000;*/
   padding: 5px;
   text-align: center;
 }
 
+.tribute-name {
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: arial;
+  text-align: center;
+  word-wrap: break-word;
+}
+
+.proceed-button {
+  display: block;
+  margin: 10px auto; /* Center the button horizontally and add some vertical margin */
+  text-align: center;
+  border: 1px solid #fff;
+  width: 80px;
+  background: #232323;
+  color: #ffcf27;
+}

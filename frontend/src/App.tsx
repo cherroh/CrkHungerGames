@@ -23,7 +23,7 @@ function App(): React.ReactElement {
       </div>
       <Reaping /> {/* Render the Reaping component */}
       <button onClick={resetAll} className="reset-button">Reset All</button>
-      <button onClick={beginSimulation} className="reset-button">Proceed</button>
+      <button onClick={beginSimulation} className="proceed-button">Proceed</button>
     </>
   );
 }

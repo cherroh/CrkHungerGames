@@ -12,7 +12,7 @@ function Reaping(): React.ReactElement {
               {cookie.slice(start, start + 6).map((cookieObj, cellIndex) => (
                 <td key={cellIndex}>
                   <img src={cookieObj.picture} alt={cookieObj.name} className="tribute-image" />
-                  <p>{cookieObj.name}</p>
+                  <p className="tribute-name">{cookieObj.name}</p>
                 </td>
               ))}
             </tr>
