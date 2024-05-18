@@ -107,3 +107,15 @@ img.logo {
   margin-top: 20px; /* Reduce space between text and top edge of the box */
   margin-bottom: 20px; /* Reduce space between text and bottom edge of the box */
 }
+
+.begin-button {
+  display: block;
+  margin-left: 255.5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+  border: 1px solid #fff;
+  width: 80px;
+  background: #232323;
+  color: #ffcf27;
+}
