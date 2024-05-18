@@ -49,3 +49,9 @@ img.logo {
 .content {
   margin-left: 200px;
 }
+
+.tribute-image {
+  height: 90px;
+  width: 90px;
+  border: 1px solid #000;
+}
