@@ -10,6 +10,11 @@ function App(): React.ReactElement {
     alert('reset all');
   }
 
+  function beginSimulation(): void {
+    console.log('Simulation Begins'); // Placeholder action
+    alert('simulation begins');
+  }
+
   return (
     <>
       <img src={cherrowlogo} alt="cherrow logo" className="logo" />
@@ -18,6 +23,7 @@ function App(): React.ReactElement {
       </div>
       <Reaping /> {/* Render the Reaping component */}
       <button onClick={resetAll} className="reset-button">Reset All</button>
+      <button onClick={beginSimulation} className="reset-button">Proceed</button>
     </>
   );
 }

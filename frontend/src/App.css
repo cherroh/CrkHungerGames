@@ -29,7 +29,7 @@ img.logo {
 
 .reset-button {
   display: block; /* Make the button a block element */
-  margin: 0px 0; /* Add some vertical margin */
+  margin: 10px 0; /* Add some vertical margin */
   clear: left; /* Ensure it clears the floating elements */
   text-align: center;
   border-top: 1px solid #fff;
