@@ -1,5 +1,5 @@
 // Define the type for a cookie person
-type Cookie = {
+type CookieType = {
     name: string;
     isAlive: boolean;
     health: number;
@@ -8,7 +8,7 @@ type Cookie = {
 };
   
 // Create an array of cookie people
-const cookiePeople: Cookie[] = [
+const cookie: CookieType[] = [
     {
         name: "Tea Knight",
         isAlive: true,
@@ -25,5 +25,4 @@ const cookiePeople: Cookie[] = [
     }
 ];
 
-// Test the array
-console.log(cookiePeople);
+export default cookie;
