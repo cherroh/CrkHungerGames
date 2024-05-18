@@ -53,6 +53,10 @@ function Bloodbath(): React.ReactElement {
         setCookieArray([...cookieArray]); // Update the state with the modified array to trigger a re-render
     }
 
+    function grabWeapon() {
+        alert("what are you doing");
+    }
+
     return (
         <div className="bloodbath">
             <div className="bloodbathlabel">
