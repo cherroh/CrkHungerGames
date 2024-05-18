@@ -22,6 +22,27 @@ const cookie: CookieType[] = [
         health: 100,
         damage: 25,
         picture: "https://i.imgur.com/PA88jOy.png",
+    },
+    {
+        name: "Tea Knight",
+        isAlive: true,
+        health: 200,
+        damage: 50,
+        picture: "https://i.imgur.com/58UTRKP.png",
+    },
+    {
+        name: "Tea Knight",
+        isAlive: true,
+        health: 200,
+        damage: 50,
+        picture: "https://i.imgur.com/58UTRKP.png",
+    },
+    {
+        name: "Tea Knight",
+        isAlive: true,
+        health: 200,
+        damage: 50,
+        picture: "https://i.imgur.com/58UTRKP.png",
     }
 ];
 
