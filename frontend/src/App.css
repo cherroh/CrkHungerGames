@@ -15,25 +15,37 @@ img.logo {
 }
 
 .headerlabel {
-    text-align: center;
-    border: 1px solid #fff;
-    background: #232323;
-    margin-left: 70px;
-    margin-right: auto;
-    color: #ffcf27;
-    display: inline-block;
-    padding: 5px;
-    margin-top: 20px; /* Reduce space between text and top edge of the box */
-    margin-bottom: 20px; /* Reduce space between text and bottom edge of the box */
+  text-align: center;
+  border: 1px solid #fff;
+  background: #232323;
+  margin-left: 70px;
+  margin-right: auto;
+  color: #ffcf27;
+  display: inline-block;
+  padding: 5px;
+  margin-top: 20px; /* Reduce space between text and top edge of the box */
+  margin-bottom: 20px; /* Reduce space between text and bottom edge of the box */
 }
 
 .reset-button {
   display: block; /* Make the button a block element */
-  margin: 10px 0; /* Add some vertical margin */
+  margin: 0px 0; /* Add some vertical margin */
   clear: left; /* Ensure it clears the floating elements */
+  text-align: center;
+  border-top: 1px solid #fff;
+  border-left: 1px solid #fff;
+  border-right: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  float: left;
+  width: 80px;
+  position: relative;
+  left: 48px;
+  top: 0px;
+  background: #232323;
+  clear: left;
+  color: #ffcf27;
 }
 
 .content {
   margin-left: 200px;
 }
-
