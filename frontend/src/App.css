@@ -81,3 +81,12 @@ img.logo {
   background: #232323;
   color: #ffcf27;
 }
+
+.district-name {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: arial;
+  text-align: center;
+  word-wrap: break-word;
+}
