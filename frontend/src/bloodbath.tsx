@@ -13,17 +13,42 @@ function Bloodbath(): React.ReactElement {
         // Loop until only one cookie remains in the array
         while (cookieArray.length > 1) {
             selectEvent(); // Perform a simulation step
+            //add remove isAlive=false cookies here
         }
     }
 
-    // Function to simulate a single step of the bloodbath
     function selectEvent() {
-        const randomIndex = Math.floor(Math.random() * cookieArray.length); // Get a random index from the array
-        const randomCookie = cookieArray[randomIndex]; // Get the cookie at the random index
+        const randomEvent = Math.floor(Math.random() * 1 + 1);
+
+        switch (randomEvent) {
+            case 1:
+                duel();
+                break;
+            case 2:
+                grabWeapon();
+                break;
+            default:
+                // Handle unexpected cases
+                break;
+        }
+    }
+
+    function duel() {
+        let randomIndexKilled = Math.floor(Math.random() * cookieArray.length); // Get a random index from the array
+        let randomCookieKilled = cookieArray[randomIndexKilled]; // Get the cookie at the random index
+
+        let randomIndexKiller;
+        let randomCookieKiller;
+
+        // Loop until we find a different cookie for the killer
+        do {
+            randomIndexKiller = Math.floor(Math.random() * cookieArray.length); // Get a random index from the array
+            randomCookieKiller = cookieArray[randomIndexKiller]; // Get the cookie at the random index
+        } while (randomCookieKilled === randomCookieKiller);
 
         // Simulate the elimination of the randomly selected cookie
-        randomCookie.isAlive = false; // Mark the cookie as not alive
-        cookieArray.splice(randomIndex, 1); // Remove the eliminated cookie from the array
+        randomCookieKilled.isAlive = false; // Mark the killed cookie as not alive
+        cookieArray.splice(randomIndexKilled, 1); // Remove the eliminated cookie from the array
 
         setCookieArray([...cookieArray]); // Update the state with the modified array to trigger a re-render
     }
