@@ -6,8 +6,7 @@ import Reaping from './reaping.tsx'; // Import the Reaping component
 function App(): React.ReactElement {
   // Define the resetAll function
   function resetAll(): void {
-    console.log('Reset All button clicked'); // Placeholder action
-    alert('reset all');
+    window.location.reload();
   }
 
   function beginSimulation(): void {
