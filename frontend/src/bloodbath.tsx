@@ -75,6 +75,17 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
             updatedCookies[randomIndex] = randomCookie;
             return updatedCookies;
         });
+
+        let duelResult = `${randomCookie.name} grabbed a sword`; // Generate grab weapon result message
+
+        setOutput(prevResults => [ // Update simulation output with duel result
+        ...prevResults,
+        {
+            killer: randomCookie.picture,
+            killed: randomCookie.picture,
+            duelResult: duelResult
+        }
+    ]);
     }
 
     return ( // Render Bloodbath component
