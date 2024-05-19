@@ -244,12 +244,18 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
 
                     let result = (
                         <>
-                            <strong>{damagingCookie.name}</strong> {eventMessage} (they have {currentCookie.health} hp now)
-                            {currentCookie.health <= 0 && (
+                            <strong>{damagingCookie.name}</strong> {eventMessage}
+                            {currentCookie.health <= 0 ? (
                                 <>
                                     {', '}
                                     <strong>{currentCookie.name}</strong>
-                                    {' died'}
+                                    {' dies'}
+                                </>
+                            ) : (
+                                <>
+                                    {', '}
+                                    <strong>{currentCookie.name}</strong>
+                                    {' survives'}
                                 </>
                             )}
                         </>
@@ -326,25 +332,25 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
         ];
 
         const meleeEvents = [
-            "{attacker} stabs {target} with a {weapon}",
-            "{attacker} slashes {target} with a {weapon}",
-            "{attacker} slaps {target} with a {weapon}",
-            "{attacker} impales {target} with a {weapon}",
-            "{attacker} shoves a {weapon} up {target}'s abdomen"
+            "stabs {target} with a {weapon}",
+            "slashes {target} with a {weapon}",
+            "slaps {target} with a {weapon}",
+            "impales {target} with a {weapon}",
+            "shoves a {weapon} up {target}'s abdomen"
         ];
 
         const rangedEvents = [
-            "{attacker} shoots {target} with a {weapon}",
-            "{attacker} snipes {target} with a {weapon}",
-            "{attacker} taunts {target}, then shoots them with a {weapon}"
+            "shoots {target} with a {weapon}",
+            "snipes {target} with a {weapon}",
+            "taunts {target}, then shoots them with a {weapon}"
         ];
 
         const explosiveEvents = [
-            "{attacker} blows up {target} with {weapon}",
-            "{attacker} detonates {weapon} near {target}",
-            "{attacker} throws {weapon} at {target} and it explodes",
-            "{attacker} throws {weapon} at {target}'s face and it explodes",
-            "{attacker} hides {weapon} in {target}'s pants and it explodes"
+            "blows up {target} with {weapon}",
+            "detonates {weapon} near {target}",
+            "throws {weapon} at {target} and it explodes",
+            "throws {weapon} at {target}'s face and it explodes",
+            "hides {weapon} in {target}'s pants and it explodes"
         ];
 
         const weaponClasses = {
@@ -390,19 +396,24 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
 
             const randomEventIndex = Math.floor(Math.random() * eventArray.length);
             eventMessage = eventArray[randomEventIndex]
-                .replace("{attacker}", randomCookie1.name)
                 .replace("{target}", randomCookie2.name)
                 .replace("{weapon}", randomCookie1.weapon);
         }
 
         let result = (
             <>
-                <strong>{randomCookie1.name}</strong> {eventMessage} (they have {randomCookie2.health} hp now)
-                {randomCookie2.health <= 0 && (
+                <strong>{randomCookie1.name}</strong> {eventMessage}
+                {randomCookie2.health <= 0 ? (
                     <>
                         {', '}
                         <strong>{randomCookie2.name}</strong>
-                        {' died'}
+                        {' dies'}
+                    </>
+                ) : (
+                    <>
+                        {', '}
+                        <strong>{randomCookie2.name}</strong>
+                        {' survives'}
                     </>
                 )}
             </>
@@ -613,15 +624,21 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
         let result: React.ReactNode = (
             <>
                 <strong>{randomCookie1.name}</strong> {eventMessages[randomEvent.eventName]}
-                {randomCookie1.health <= 0 && (
+                {randomCookie1.health <= 0 ? (
                     <>
                         {', '}
                         <strong>{randomCookie1.name}</strong>
-                        {' died'}
+                        {' dies'}
+                    </>
+                ) : (
+                    <>
+                        {', '}
+                        <strong>{randomCookie1.name}</strong>
+                        {' survives'}
                     </>
                 )}
             </>
-        );
+        );        
 
         if (randomCookie1.health <= 0) { // Check if the hurt cookie is dead
             randomCookie1.isAlive = false; // Mark hurt cookie as not alive
