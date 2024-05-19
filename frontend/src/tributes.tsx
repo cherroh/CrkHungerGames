@@ -5,6 +5,7 @@ type CookieType = {
     health: number;
     damage: number;
     picture: string; // New attribute for picture
+    weapon: string;
 };
   
 // Create an array of cookie people
@@ -15,6 +16,7 @@ const cookie: CookieType[] = [
         health: 120,
         damage: 60,
         picture: "https://i.imgur.com/tsQKs7n.png",
+        weapon: "none"
     },
     {
         name: "Fishgato",
@@ -22,6 +24,7 @@ const cookie: CookieType[] = [
         health: 100,
         damage: 50,
         picture: "https://i.imgur.com/0M5hxK3.png",
+        weapon: "none"
     },
     {
         name: "Milky Way",
@@ -29,6 +32,7 @@ const cookie: CookieType[] = [
         health: 70,
         damage: 50,
         picture: "https://i.imgur.com/eLJZiWq.png",
+        weapon: "none"
     },
     {
         name: "Strawberry Crepe",
@@ -36,6 +40,7 @@ const cookie: CookieType[] = [
         health: 80,
         damage: 50,
         picture: "https://i.imgur.com/jdhUz2L.png",
+        weapon: "none"
     },
     {
         name: "Red Velvet",
@@ -43,6 +48,7 @@ const cookie: CookieType[] = [
         health: 100,
         damage: 50,
         picture: "https://i.imgur.com/yhH2NpW.png",
+        weapon: "none"
     },
     {
         name: "Chiffon",
@@ -50,6 +56,7 @@ const cookie: CookieType[] = [
         health: 70,
         damage: 40,
         picture: "https://i.imgur.com/5cQS1r2.png",
+        weapon: "none"
     },
     {
         name: "Rye",
@@ -57,6 +64,7 @@ const cookie: CookieType[] = [
         health: 100,
         damage: 60,
         picture: "https://i.imgur.com/R2phax2.png",
+        weapon: "none"
     },
     {
         name: "Chili Pepper",
@@ -64,6 +72,7 @@ const cookie: CookieType[] = [
         health: 90,
         damage: 60,
         picture: "https://i.imgur.com/BgXs8MM.png",
+        weapon: "none"
     },
     {
         name: "Licorice",
@@ -71,6 +80,7 @@ const cookie: CookieType[] = [
         health: 90,
         damage: 50,
         picture: "https://i.imgur.com/HoU9H3O.png",
+        weapon: "none"
     },
     {
         name: "Espresso",
@@ -78,6 +88,7 @@ const cookie: CookieType[] = [
         health: 90,
         damage: 60,
         picture: "https://i.imgur.com/ovR9w2v.png",
+        weapon: "none"
     },
     {
         name: "Madeleine",
@@ -85,6 +96,7 @@ const cookie: CookieType[] = [
         health: 120,
         damage: 60,
         picture: "https://i.imgur.com/uW9yIcu.png",
+        weapon: "none"
     },
     {
         name: "Cream Unicorn",
@@ -92,6 +104,7 @@ const cookie: CookieType[] = [
         health: 90,
         damage: 40,
         picture: "https://i.imgur.com/PA88jOy.png",
+        weapon: "none"
     },
     {
         name: "Tea Knight",
@@ -99,6 +112,7 @@ const cookie: CookieType[] = [
         health: 150,
         damage: 60,
         picture: "https://i.imgur.com/58UTRKP.png",
+        weapon: "none"
     },
     {
         name: "Robust Axe",
@@ -106,6 +120,7 @@ const cookie: CookieType[] = [
         health: 80,
         damage: 70,
         picture: "https://i.imgur.com/0EQfqJn.png",
+        weapon: "none"
     },
     {
         name: "Sea Farty",
@@ -113,6 +128,7 @@ const cookie: CookieType[] = [
         health: 90,
         damage: 60,
         picture: "https://i.imgur.com/yzGRckx.png",
+        weapon: "none"
     },
     {
         name: "Frost Flop",
@@ -120,6 +136,7 @@ const cookie: CookieType[] = [
         health: 80,
         damage: 70,
         picture: "https://i.imgur.com/Ofak5Fg.png",
+        weapon: "none"
     },
     {
         name: "Dark Cocoasas",
@@ -127,6 +144,7 @@ const cookie: CookieType[] = [
         health: 120,
         damage: 50,
         picture: "https://i.imgur.com/jSNvTUn.png",
+        weapon: "none"
     },
     {
         name: "Hollyflop",
@@ -134,6 +152,7 @@ const cookie: CookieType[] = [
         health: 150,
         damage: 50,
         picture: "https://i.imgur.com/8jsXJyT.png",
+        weapon: "none"
     },
     {
         name: "Pv",
@@ -141,6 +160,7 @@ const cookie: CookieType[] = [
         health: 110,
         damage: 40,
         picture: "https://i.imgur.com/RVFIsgk.png",
+        weapon: "none"
     },
     {
         name: "White Lily",
@@ -148,6 +168,7 @@ const cookie: CookieType[] = [
         health: 100,
         damage: 60,
         picture: "https://i.imgur.com/E1UFnoX.png",
+        weapon: "none"
     },
     {
         name: "Golden Cheese",
@@ -155,6 +176,7 @@ const cookie: CookieType[] = [
         health: 120,
         damage: 70,
         picture: "https://i.imgur.com/zBMyrtc.png",
+        weapon: "none"
     },
     {
         name: "Caprisun",
@@ -162,6 +184,7 @@ const cookie: CookieType[] = [
         health: 110,
         damage: 50,
         picture: "https://i.imgur.com/lIjChQc.png",
+        weapon: "none"
     },
     {
         name: "Shadow Milk",
@@ -169,6 +192,7 @@ const cookie: CookieType[] = [
         health: 100,
         damage: 60,
         picture: "https://i.imgur.com/8ztckud.png",
+        weapon: "none"
     },
     {
         name: "Eggliar",
@@ -176,6 +200,7 @@ const cookie: CookieType[] = [
         health: 90,
         damage: 40,
         picture: "https://i.imgur.com/uPyG4hg.png",
+        weapon: "none"
     }
 ];
 

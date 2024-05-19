@@ -12,7 +12,7 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
         let days = 0; // Initialize the days counter outside the loop
 
         while (cookieArray.length > 1) { // Loop until only one cookie remains in the array
-            if (days % 35 === 0 && cookieArray.length > 4) { // Check if it's the 7th day
+            if (days % 100 === 0 && cookieArray.length > 4) { // Check if it's the 7th day
                 feast(); // Call feast function on every 7th day
             }
             if (cookieArray.length > 1) {
@@ -208,23 +208,55 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
     }
 
     function grabWeapon() {
-        const weapons = ["sword", "axe", "bow", "staff", "dagger"]; // Array of possible weapons
+        // Array of possible weapons with names and damage
+        const weapons = [
+            { weaponName: "stick", weaponDamage: 10 },
+            { weaponName: "shovel", weaponDamage: 20 },
+            { weaponName: "axe", weaponDamage: 30 },
+            { weaponName: "knife", weaponDamage: 20 },
+            { weaponName: "sword", weaponDamage: 30 },
+            { weaponName: "spear", weaponDamage: 30 },
+            { weaponName: "bow", weaponDamage: 30 },
+            { weaponName: "gun", weaponDamage: 50 },
+            { weaponName: "landmines", weaponDamage: 50 },
+            { weaponName: "bombs", weaponDamage: 50 },
+        ];
+    
+        const weaponMessages: { [key: string]: string } = {
+            "stick": "finds a stick on the ground, then decides to use it as a weapon",
+            "shovel": "finds a shovel, then decides to use it as a weapon",
+            "axe": "creates a robust axe",
+            "knife": "finds knives laying around and takes them",
+            "sword": "finds a sword",
+            "spear": "creates a spear",
+            "bow": "finds a bow and some arrows",
+            "gun": "finds a gun, well things are about to get violent",
+            "landmines": "finds some unused landmines",
+            "bombs": "finds some bombs"
+        };
+    
         const randomWeaponIndex = Math.floor(Math.random() * weapons.length); // Randomly select a weapon index
         const randomWeapon = weapons[randomWeaponIndex]; // Get the selected weapon
-
+    
         const randomIndex = Math.floor(Math.random() * cookieArray.length); // Get a random index for selecting a cookie
         const randomCookie = cookieArray[randomIndex]; // Get the selected cookie
-
-        randomCookie.damage += 50; // Increase damage of the selected cookie by 50
-
+    
+        randomCookie.damage += randomWeapon.weaponDamage; // Increase damage of the selected cookie by the weapon's damage
+        randomCookie.weapon = randomWeapon.weaponName; // Set the cookie's weapon to the selected weapon's name
+    
         setCookieArray(prevCookies => { // Update the state with the modified cookie array
             const updatedCookies = [...prevCookies];
-            updatedCookies[randomIndex] = randomCookie;
+            updatedCookies[randomIndex] = { ...randomCookie }; // Ensure immutability
             return updatedCookies;
         });
-
-        let result: React.ReactNode = <><strong>{randomCookie.name}</strong> grabbed a {randomWeapon}</>; // Generate grab weapon result message with chosen weapon
-
+    
+        const weaponMessage = weaponMessages[randomWeapon.weaponName];
+        let result: React.ReactNode = (
+            <>
+                <strong>{randomCookie.name}</strong> {weaponMessage}
+            </>
+        ); // Generate grab weapon result message with chosen weapon
+    
         setOutput(prevResults => [ // Update simulation output with grab weapon result
             ...prevResults,
             {
