@@ -56,6 +56,32 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
 
     function feast() {
 
+        const weapons = [
+            { weaponName: "stick", weaponDamage: 10 },
+            { weaponName: "shovel", weaponDamage: 20 },
+            { weaponName: "axe", weaponDamage: 30 },
+            { weaponName: "knife", weaponDamage: 20 },
+            { weaponName: "sword", weaponDamage: 30 },
+            { weaponName: "spear", weaponDamage: 30 },
+            { weaponName: "bow", weaponDamage: 30 },
+            { weaponName: "gun", weaponDamage: 50 },
+            { weaponName: "landmines", weaponDamage: 50 },
+            { weaponName: "bombs", weaponDamage: 50 },
+        ];
+
+        const weaponMessages: { [key: string]: string } = {
+            "stick": "finds a stick on the ground, then decides to use it as a weapon",
+            "shovel": "finds a shovel, then decides to use it as a weapon",
+            "axe": "creates a robust axe",
+            "knife": "finds knives laying around and takes them",
+            "sword": "finds a sword",
+            "spear": "creates a spear",
+            "bow": "finds a bow and some arrows",
+            "gun": "finds a gun, well things are about to get violent",
+            "landmines": "finds some unused landmines",
+            "bombs": "finds some bombs"
+        };
+
         let result: React.ReactNode = (
             <div className="feastlabel">
                 A Feast Began
@@ -108,13 +134,25 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
                     }
                 ]);
             } else if (outcome < 0.67) {
-                currentCookie.damage += 50; // Gain health
-                setOutput(prevResults => [
+                const randomWeaponIndex = Math.floor(Math.random() * weapons.length); // Randomly select a weapon index
+                const randomWeapon = weapons[randomWeaponIndex]; // Get the selected weapon
+
+                currentCookie.damage += randomWeapon.weaponDamage; // Increase damage of the selected cookie by the weapon's damage
+                currentCookie.weapon = randomWeapon.weaponName; // Set the cookie's weapon to the selected weapon's name
+
+                const weaponMessage = weaponMessages[randomWeapon.weaponName];
+                let result: React.ReactNode = (
+                    <>
+                        <strong>{currentCookie.name}</strong> {weaponMessage}
+                    </>
+                ); // Generate grab weapon result message with chosen weapon
+
+                setOutput(prevResults => [ // Update simulation output with grab weapon result
                     ...prevResults,
                     {
                         Cookie1: currentCookie.picture,
                         Cookie2: "empty",
-                        result: <><strong>{currentCookie.name}</strong> found a weapon</>
+                        result: result
                     }
                 ]);
             } else {
