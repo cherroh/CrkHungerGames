@@ -5,7 +5,7 @@ import cookie from './tributes.tsx'; // Import cookie data
 function Bloodbath(): React.ReactElement { // Define Bloodbath component
     const [cookieArray, setCookieArray] = useState(cookie); // Initialize state for cookie array
     const [simulationReady, setSimulationReady] = useState(true); // Initialize state for simulation readiness
-    const [output, setOutput] = useState<{ Cookie1: string; Cookie2: string; result: string; }[]>([]); // Initialize state for simulation output
+    const [output, setOutput] = useState<{ Cookie1: string; Cookie2: string; result: React.ReactNode; }[]>([]); // Initialize state for simulation output
 
     function beginSimulation() { // Function to begin simulation
         setSimulationReady(false); // Set simulation readiness state to false
@@ -49,12 +49,23 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
         } while (randomCookie2 === randomCookie1); // Repeat loop if same cookie is selected as both killed and killer
 
         randomCookie2.health -= randomCookie1.damage; // Reduce health of the killed cookie by killer's damage
-        let result = `${randomCookie1.name} stabbed ${randomCookie2.name} (they have ${randomCookie2.health} hp now)`; // Generate duel result message
+
+        let result: React.ReactNode = (
+            <>
+                <strong>{randomCookie1.name}</strong> stabbed <strong>{randomCookie2.name}</strong> (they have {randomCookie2.health} hp now)
+                {randomCookie2.health <= 0 && (
+                    <>
+                        {', '}
+                        <strong>{randomCookie2.name}</strong>
+                        {' died'}
+                    </>
+                )}
+            </>
+        );
 
         if (randomCookie2.health <= 0) { // Check if the killed cookie is dead
             randomCookie2.isAlive = false; // Mark killed cookie as not alive
             cookieArray.splice(randomIndexCookie2, 1); // Remove the killed cookie from the array
-            result += `, ${randomCookie2.name} died`; // Add information about the killed cookie
         }
 
         setOutput(prevResults => [ // Update simulation output with duel result
@@ -81,7 +92,7 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
             return updatedCookies;
         });
 
-        let result = `${randomCookie.name} grabbed a sword`; // Generate grab weapon result message
+        let result: React.ReactNode = <><strong>{randomCookie.name}</strong> grabbed a sword</>; // Generate grab weapon result message
 
         setOutput(prevResults => [ // Update simulation output with duel result
             ...prevResults,
@@ -105,7 +116,7 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
             return updatedCookies;
         });
 
-        let result = `${randomCookie.name} received an airdrop`; // Generate grab supplies result message
+        let result: React.ReactNode = <><strong>{randomCookie.name}</strong> recieved an airdrop</>; // Generate grab supplies result message
 
         setOutput(prevResults => [ // Update simulation output with grab supplies result
             ...prevResults,
@@ -129,7 +140,11 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
             randomCookie1 = cookieArray[randomIndexCookie1]; // Get the killer cookie
         } while (randomCookie2 === randomCookie1); // Repeat loop if same cookie is selected as both killed and killer
 
-        let result = `${randomCookie1.name} makes fun of ${randomCookie2.name}`; // Generate duel result message
+        let result: React.ReactNode = (
+            <>
+                <strong>{randomCookie1.name}</strong> makes fun of <strong>{randomCookie2.name}</strong>
+            </>
+        );
 
         setOutput(prevResults => [ // Update simulation output with duel result
             ...prevResults,
@@ -161,7 +176,7 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
                     {cookieArray.length === 1 && index === output.length - 1 && (
                         <div>
                             <img src={cookieArray[0].picture} alt="winner" className="tribute-image" />
-                            <p>The last one standing is {cookieArray[0].name}! {cookieArray[0].name} is the Winner!</p>
+                            <p>The last one standing is <strong>{cookieArray[0].name}</strong>! <strong>{cookieArray[0].name}</strong> is the Winner!</p>
                         </div>
                     )}
                 </div>

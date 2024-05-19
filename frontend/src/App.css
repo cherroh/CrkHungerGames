@@ -93,6 +93,16 @@ img.logo {
 
 .bloodbath {
   margin-left: 200px;
+  text-align: center;
+  width: 660px;
+  position: absolute;
+  margin-top: -58px;
+  left: 220px;
+  float: left;
+  margin-left: auto;
+  margin-right: auto;
+  color: #fff;
+  padding: 5px;
 }
 
 .bloodbathlabel {
@@ -118,4 +128,9 @@ img.logo {
   width: 80px;
   background: #232323;
   color: #ffcf27;
+}
+
+strong {
+  font-weight: bold;
+  color: rgb(251, 130, 0);
 }
