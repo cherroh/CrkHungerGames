@@ -342,14 +342,46 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
     }
 
     function selfDeath() {
-        let randomIndexCookie1 = Math.floor(Math.random() * cookieArray.length); // Get a random index for the cookie to be killed
-        let randomCookie1 = cookieArray[randomIndexCookie1]; // Get the killed cookie
+        // Array of possible harmful events with a fixed damage of 50
+        const events = [
+            { eventName: "landmine", damage: 70 },
+            { eventName: "pit", damage: 20 },
+            { eventName: "trips", damage: 10 },
+            { eventName: "frozen lake", damage: 40 },
+            { eventName: "tree branch", damage: 50 },
+            { eventName: "spoiled food", damage: 20 },
+            { eventName: "poisoned food", damage: 30 },
+            { eventName: "bear trap", damage: 50 },
+            { eventName: "infection", damage: 20 },
+            { eventName: "tree fall", damage: 20 },
+            { eventName: "electric fence", damage: 50 }
+        ];
 
-        randomCookie1.health -= 50; // Reduce health of the killed cookie by killer's damage
+        const eventMessages: { [key: string]: string } = {
+            "landmine": "accidentally steps on a landmine",
+            "pit": "falls into a pit",
+            "trips": "trips like an idiot",
+            "frozen lake": "falls into a frozen lake",
+            "tree branch": "gets impaled by a tree branch",
+            "spoiled food": "found spoiled food and ate it",
+            "poisoned food": "sneaks into someone’s food stash, but the food was poisoned",
+            "bear trap": "is caught in a bear trap",
+            "infection": "suffers from an infection",
+            "tree fall": "climbs a tree but falls",
+            "electric fence": "attempts to escape the arena, only to be met with an electric fence"
+        };
+
+        const randomEventIndex = Math.floor(Math.random() * events.length); // Randomly select an event index
+        const randomEvent = events[randomEventIndex]; // Get the selected event
+
+        const randomIndexCookie1 = Math.floor(Math.random() * cookieArray.length); // Get a random index for the cookie to be hurt
+        const randomCookie1 = cookieArray[randomIndexCookie1]; // Get the hurt cookie
+
+        randomCookie1.health -= randomEvent.damage; // Reduce health of the hurt cookie by the event's damage
 
         let result: React.ReactNode = (
             <>
-                <strong>{randomCookie1.name}</strong> hurt themself (they have {randomCookie1.health} hp now)
+                <strong>{randomCookie1.name}</strong> {eventMessages[randomEvent.eventName]}
                 {randomCookie1.health <= 0 && (
                     <>
                         {', '}
@@ -360,12 +392,12 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
             </>
         );
 
-        if (randomCookie1.health <= 0) { // Check if the killed cookie is dead
-            randomCookie1.isAlive = false; // Mark killed cookie as not alive
-            cookieArray.splice(randomIndexCookie1, 1); // Remove the killed cookie from the array
+        if (randomCookie1.health <= 0) { // Check if the hurt cookie is dead
+            randomCookie1.isAlive = false; // Mark hurt cookie as not alive
+            cookieArray.splice(randomIndexCookie1, 1); // Remove the hurt cookie from the array
         }
 
-        setOutput(prevResults => [ // Update simulation output with duel result
+        setOutput(prevResults => [ // Update simulation output with the event result
             ...prevResults,
             {
                 Cookie1: randomCookie1.picture,
