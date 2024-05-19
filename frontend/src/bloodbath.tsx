@@ -15,7 +15,7 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
     }
 
     function selectEvent() { // Function to select a random event
-        const randomEvent = Math.floor(Math.random() * 3 + 1); // Generate a random number to select event
+        const randomEvent = Math.floor(Math.random() * 4 + 1); // Generate a random number to select event
 
         switch (randomEvent) { // Switch case based on random event
             case 1: // If random event is 1, call duel function
@@ -26,6 +26,9 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
                 break;
             case 3: // If random event is 2, call grabWeapon function
                 grabSupplies();
+                break;
+            case 4: // If random event is 2, call grabWeapon function
+                taunt();
                 break;
             default:
                 // Handle unexpected cases
@@ -93,17 +96,17 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
     function grabSupplies() {
         const randomIndex = Math.floor(Math.random() * cookieArray.length); // Get a random index for selecting a cookie
         const randomCookie = cookieArray[randomIndex]; // Get the selected cookie
-    
+
         randomCookie.health += 50; // Increase health of the selected cookie by 50
-    
+
         setCookieArray(prevCookies => { // Update the state with the modified cookie array
             const updatedCookies = [...prevCookies];
             updatedCookies[randomIndex] = randomCookie;
             return updatedCookies;
         });
-    
+
         let result = `${randomCookie.name} received an airdrop`; // Generate grab supplies result message
-    
+
         setOutput(prevResults => [ // Update simulation output with grab supplies result
             ...prevResults,
             {
@@ -112,6 +115,32 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
                 result: result
             }
         ]);
+    }
+
+    function taunt() {
+        let randomIndexCookie2 = Math.floor(Math.random() * cookieArray.length); // Get a random index for the cookie to be killed
+        let randomCookie2 = cookieArray[randomIndexCookie2]; // Get the killed cookie
+
+        let randomIndexCookie1; // Initialize variable for killer index
+        let randomCookie1; // Initialize variable for killer cookie
+
+        do { // Loop until a different cookie is selected as the killer
+            randomIndexCookie1 = Math.floor(Math.random() * cookieArray.length); // Get a random index for the killer cookie
+            randomCookie1 = cookieArray[randomIndexCookie1]; // Get the killer cookie
+        } while (randomCookie2 === randomCookie1); // Repeat loop if same cookie is selected as both killed and killer
+
+        let result = `${randomCookie1.name} makes fun of ${randomCookie2.name}`; // Generate duel result message
+
+        setOutput(prevResults => [ // Update simulation output with duel result
+            ...prevResults,
+            {
+                Cookie1: randomCookie1.picture,
+                Cookie2: randomCookie2.picture,
+                result: result
+            }
+        ]);
+
+        setCookieArray([...cookieArray]); // Update the state with the modified array to trigger a re-render
     }
 
     return (
