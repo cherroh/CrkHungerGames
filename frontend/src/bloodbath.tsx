@@ -65,8 +65,8 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
 
         // Process the cookies that stayed at the feast
         feastCookies.forEach(currentCookie => {
-            const outcome = Math.random() < 0.5; // Determine if the current cookie gains health (true) or takes damage (false)
-            if (outcome) {
+            const outcome = Math.random(); // Determine if the current cookie gains health (true) or takes damage (false)
+            if (outcome < 0.33) {
                 currentCookie.health += 50; // Gain health
                 setOutput(prevResults => [
                     ...prevResults,
@@ -74,6 +74,16 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
                         Cookie1: currentCookie.picture,
                         Cookie2: "empty",
                         result: <><strong>{currentCookie.name}</strong> ate well</>
+                    }
+                ]);
+            } else if (outcome < 0.67) {
+                currentCookie.damage += 50; // Gain health
+                setOutput(prevResults => [
+                    ...prevResults,
+                    {
+                        Cookie1: currentCookie.picture,
+                        Cookie2: "empty",
+                        result: <><strong>{currentCookie.name}</strong> found a weapon</>
                     }
                 ]);
             } else {
