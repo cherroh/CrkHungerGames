@@ -82,6 +82,42 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
             "bombs": "finds some bombs"
         };
 
+        const noWeaponEvents = [
+            "strangles {target}",
+            "and {target} engage in a fist fight",
+            "bashes {target}'s head into a rock several times",
+            "twists {target}'s neck",
+            "sneaks up on {target} and beats them up"
+        ];
+
+        const meleeEvents = [
+            "{attacker} stabs {target} with a {weapon}",
+            "{attacker} slashes {target} with a {weapon}",
+            "{attacker} slaps {target} with a {weapon}",
+            "{attacker} impales {target} with a {weapon}",
+            "{attacker} shoves a {weapon} up {target}'s abdomen"
+        ];
+
+        const rangedEvents = [
+            "{attacker} shoots {target} with a {weapon}",
+            "{attacker} snipes {target} with a {weapon}",
+            "{attacker} taunts {target}, then shoots them with a {weapon}"
+        ];
+
+        const explosiveEvents = [
+            "{attacker} blows up {target} with {weapon}",
+            "{attacker} detonates {weapon} near {target}",
+            "{attacker} throws {weapon} at {target} and it explodes",
+            "{attacker} throws {weapon} at {target}'s face and it explodes",
+            "{attacker} hides {weapon} in {target}'s pants and it explodes"
+        ];
+
+        const weaponClasses = {
+            "melee": ["stick", "shovel", "axe", "knife", "sword", "spear"],
+            "ranged": ["bow", "gun"],
+            "explosives": ["landmines", "bombs"]
+        };
+
         let result: React.ReactNode = (
             <div className="feastlabel">
                 A Feast Began
@@ -122,66 +158,113 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
 
         // Process the cookies that stayed at the feast
         feastCookies.forEach(currentCookie => {
-            const outcome = Math.random(); // Determine if the current cookie gains health (true) or takes damage (false)
-            if (outcome < 0.33) {
-                currentCookie.health += 50; // Gain health
-                setOutput(prevResults => [
-                    ...prevResults,
-                    {
-                        Cookie1: currentCookie.picture,
-                        Cookie2: "empty",
-                        result: <><strong>{currentCookie.name}</strong> ate well</>
+            if (currentCookie.isAlive) {
+                const outcome = Math.random(); // Determine if the current cookie gains health (true) or takes damage (false)
+                if (outcome < 0.33) {
+                    currentCookie.health += 50; // Gain health
+                    setOutput(prevResults => [
+                        ...prevResults,
+                        {
+                            Cookie1: currentCookie.picture,
+                            Cookie2: "empty",
+                            result: <><strong>{currentCookie.name}</strong> ate well</>
+                        }
+                    ]);
+                } else if (outcome < 0.67) {
+                    const randomWeaponIndex = Math.floor(Math.random() * weapons.length); // Randomly select a weapon index
+                    const randomWeapon = weapons[randomWeaponIndex]; // Get the selected weapon
+
+                    currentCookie.damage += randomWeapon.weaponDamage; // Increase damage of the selected cookie by the weapon's damage
+                    currentCookie.weapon = randomWeapon.weaponName; // Set the cookie's weapon to the selected weapon's name
+
+                    const weaponMessage = weaponMessages[randomWeapon.weaponName];
+                    let result: React.ReactNode = (
+                        <>
+                            <strong>{currentCookie.name}</strong> {weaponMessage}
+                        </>
+                    ); // Generate grab weapon result message with chosen weapon
+
+                    setOutput(prevResults => [ // Update simulation output with grab weapon result
+                        ...prevResults,
+                        {
+                            Cookie1: currentCookie.picture,
+                            Cookie2: "empty",
+                            result: result
+                        }
+                    ]);
+                } else {
+                    // Get the damaging cookie excluding the current cookie
+                    const damagingCookie = feastCookies.filter(cookie => cookie !== currentCookie)[Math.floor(Math.random() * (feastCookies.length - 1))];
+                    currentCookie.health -= damagingCookie.damage; // Take damage
+
+                    let eventMessage = "";
+                    if (!damagingCookie.weapon || damagingCookie.weapon === "none") {
+                        const randomEventIndex = Math.floor(Math.random() * noWeaponEvents.length);
+                        eventMessage = noWeaponEvents[randomEventIndex].replace("{target}", currentCookie.name);
+                    } else {
+                        let weaponClass: keyof typeof weaponClasses = "melee"; // Explicit type declaration
+                        for (let key in weaponClasses) {
+                            if (weaponClasses[key as keyof typeof weaponClasses].includes(damagingCookie.weapon)) { // Type assertion
+                                weaponClass = key as keyof typeof weaponClasses;
+                                break;
+                            }
+                        }
+
+                        let eventArray: string[] = []; // Initialize eventArray
+                        if (weaponClass === "melee") {
+                            eventArray = meleeEvents;
+                        } else if (weaponClass === "ranged") {
+                            eventArray = rangedEvents;
+                        } else if (weaponClass === "explosives") {
+                            eventArray = explosiveEvents;
+                        }
+
+                        const randomEventIndex = Math.floor(Math.random() * eventArray.length);
+                        eventMessage = eventArray[randomEventIndex]
+                            .replace("{attacker}", damagingCookie.name)
+                            .replace("{target}", currentCookie.name)
+                            .replace("{weapon}", damagingCookie.weapon);
                     }
-                ]);
-            } else if (outcome < 0.67) {
-                const randomWeaponIndex = Math.floor(Math.random() * weapons.length); // Randomly select a weapon index
-                const randomWeapon = weapons[randomWeaponIndex]; // Get the selected weapon
 
-                currentCookie.damage += randomWeapon.weaponDamage; // Increase damage of the selected cookie by the weapon's damage
-                currentCookie.weapon = randomWeapon.weaponName; // Set the cookie's weapon to the selected weapon's name
+                    let result = (
+                        <>
+                            <strong>{damagingCookie.name}</strong> {eventMessage} (they have {currentCookie.health} hp now)
+                            {currentCookie.health <= 0 && (
+                                <>
+                                    {', '}
+                                    <strong>{currentCookie.name}</strong>
+                                    {' died'}
+                                </>
+                            )}
+                        </>
+                    );
 
-                const weaponMessage = weaponMessages[randomWeapon.weaponName];
-                let result: React.ReactNode = (
-                    <>
-                        <strong>{currentCookie.name}</strong> {weaponMessage}
-                    </>
-                ); // Generate grab weapon result message with chosen weapon
-
-                setOutput(prevResults => [ // Update simulation output with grab weapon result
-                    ...prevResults,
-                    {
-                        Cookie1: currentCookie.picture,
-                        Cookie2: "empty",
-                        result: result
+                    if (currentCookie.health <= 0) { // Check if the killed cookie is dead
+                        currentCookie.isAlive = false; // Mark killed cookie as not alive
+                        const index = cookieArray.findIndex(cookie => cookie.name === currentCookie.name); // Find the index of the currentCookie in cookieArray
+                        const index2 = feastCookies.findIndex(cookie => cookie.name === currentCookie.name);
+                        if (index !== -1) { // Ensure the cookie exists in cookieArray
+                            cookieArray.splice(index, 1); // Remove the killed cookie from the array
+                        }
+                        if (index2 !== -1) { // Ensure the cookie exists in cookieArray
+                            feastCookies.splice(index2, 1); // Remove the killed cookie from the array
+                        }
                     }
-                ]);
-            } else {
-                // Get the damaging cookie excluding the current cookie
-                const damagingCookie = feastCookies.filter(cookie => cookie !== currentCookie)[Math.floor(Math.random() * (feastCookies.length - 1))];
-                currentCookie.health -= damagingCookie.damage; // Take damage
 
-                let result: React.ReactNode = (
-                    <>
-                        <strong>{damagingCookie.name}</strong> stabbed <strong>{currentCookie.name}</strong> (they have {currentCookie.health} hp now)
-                        {currentCookie.health <= 0 && (
-                            <>
-                                {', '}
-                                <strong>{currentCookie.name}</strong>
-                                {' died'}
-                            </>
-                        )}
-                    </>
-                );
+                    setOutput(prevResults => [ // Update simulation output with duel result
+                        ...prevResults,
+                        {
+                            Cookie1: damagingCookie.picture,
+                            Cookie2: currentCookie.picture,
+                            result: result
+                        }
+                    ]);
 
-                setOutput(prevResults => [
-                    ...prevResults,
-                    {
-                        Cookie1: damagingCookie.picture,
-                        Cookie2: currentCookie.picture,
-                        result: result
-                    }
-                ]);
+                    setCookieArray([...feastCookies]); // Update the state with the modified array to trigger a re-render
+
+                }
             }
+            setCookieArray([...feastCookies]);
         });
 
         let result2: React.ReactNode = (
