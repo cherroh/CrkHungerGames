@@ -1,7 +1,6 @@
 import React, { useState } from 'react'; // Import React and useState hook
 import './App.css'; // Import CSS styles
 import cookie from './tributes.tsx'; // Import cookie data
-import Reaping from './reaping.tsx'; // Import Reaping component
 
 function Bloodbath(): React.ReactElement { // Define Bloodbath component
     const [cookieArray, setCookieArray] = useState(cookie); // Initialize state for cookie array
@@ -16,7 +15,7 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
     }
 
     function selectEvent() { // Function to select a random event
-        const randomEvent = Math.floor(Math.random() * 2 + 1); // Generate a random number to select event
+        const randomEvent = Math.floor(Math.random() * 3 + 1); // Generate a random number to select event
 
         switch (randomEvent) { // Switch case based on random event
             case 1: // If random event is 1, call duel function
@@ -24,6 +23,9 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
                 break;
             case 2: // If random event is 2, call grabWeapon function
                 grabWeapon();
+                break;
+            case 3: // If random event is 2, call grabWeapon function
+                grabSupplies();
                 break;
             default:
                 // Handle unexpected cases
@@ -44,7 +46,7 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
         } while (randomCookie2 === randomCookie1); // Repeat loop if same cookie is selected as both killed and killer
 
         randomCookie2.health -= randomCookie1.damage; // Reduce health of the killed cookie by killer's damage
-        let result = `${randomCookie1.name} stabbed ${randomCookie2.name}`; // Generate duel result message
+        let result = `${randomCookie1.name} stabbed ${randomCookie2.name} (they have ${randomCookie2.health} hp now)`; // Generate duel result message
 
         if (randomCookie2.health <= 0) { // Check if the killed cookie is dead
             randomCookie2.isAlive = false; // Mark killed cookie as not alive
@@ -88,6 +90,30 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
         ]);
     }
 
+    function grabSupplies() {
+        const randomIndex = Math.floor(Math.random() * cookieArray.length); // Get a random index for selecting a cookie
+        const randomCookie = cookieArray[randomIndex]; // Get the selected cookie
+    
+        randomCookie.health += 50; // Increase health of the selected cookie by 50
+    
+        setCookieArray(prevCookies => { // Update the state with the modified cookie array
+            const updatedCookies = [...prevCookies];
+            updatedCookies[randomIndex] = randomCookie;
+            return updatedCookies;
+        });
+    
+        let result = `${randomCookie.name} received an airdrop`; // Generate grab supplies result message
+    
+        setOutput(prevResults => [ // Update simulation output with grab supplies result
+            ...prevResults,
+            {
+                Cookie1: randomCookie.picture,
+                Cookie2: "empty",
+                result: result
+            }
+        ]);
+    }
+
     return (
         <div className="bloodbath">
             <div className="bloodbathlabel">
@@ -100,8 +126,8 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
             {simulationReady && <button onClick={beginSimulation} className="begin-button">Begin Simulation</button>}
             {output.map((result, index) => (
                 <div key={index}>
-                    {result.Cookie1 !== "empty" && <img src={result.Cookie1} alt="killer" className="tribute-image" />}
-                    {result.Cookie2 !== "empty" && <img src={result.Cookie2} alt="killed" className="tribute-image" />}
+                    {result.Cookie1 !== "empty" && <img src={result.Cookie1} alt="Cookie1" className="tribute-image" />}
+                    {result.Cookie2 !== "empty" && <img src={result.Cookie2} alt="Cookie2" className="tribute-image" />}
                     <p>{result.result}</p>
                     {cookieArray.length === 1 && index === output.length - 1 && (
                         <div>
