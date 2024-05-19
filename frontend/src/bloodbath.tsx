@@ -49,7 +49,7 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
         if (randomCookieKilled.health <= 0) { // Check if the killed cookie is dead
             randomCookieKilled.isAlive = false; // Mark killed cookie as not alive
             cookieArray.splice(randomIndexKilled, 1); // Remove the killed cookie from the array
-            duelResult += `, ${randomCookieKilled.name} cookie died`; // Add information about the killed cookie
+            duelResult += `, ${randomCookieKilled.name} died`; // Add information about the killed cookie
         }
 
         setOutput(prevResults => [ // Update simulation output with duel result
@@ -79,13 +79,13 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
         let duelResult = `${randomCookie.name} grabbed a sword`; // Generate grab weapon result message
 
         setOutput(prevResults => [ // Update simulation output with duel result
-        ...prevResults,
-        {
-            killer: randomCookie.picture,
-            killed: randomCookie.picture,
-            duelResult: duelResult
-        }
-    ]);
+            ...prevResults,
+            {
+                killer: randomCookie.picture,
+                killed: "empty",
+                duelResult: duelResult
+            }
+        ]);
     }
 
     return ( // Render Bloodbath component
@@ -95,11 +95,11 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
             </div>
             <Reaping /> {/* Include the Reaping component */}
             {simulationReady && <button onClick={beginSimulation} className="begin-button">Begin Simulation</button>} {/* Render Begin Simulation button if simulation is ready */}
-            {output.map((result, index) => ( // Render simulation output
-                <div key={index}> {/* Output item container */}
-                    <img src={result.killer} alt="killer" className="tribute-image" /> {/* Image of the killer */}
-                    <img src={result.killed} alt="killed" className="tribute-image" /> {/* Image of the killed cookie */}
-                    <p>{result.duelResult}</p> {/* Duel result message */}
+            {output.map((result, index) => (
+                <div key={index}>
+                    <img src={result.killer} alt="killer" className="tribute-image" />
+                    {result.killed !== "empty" && <img src={result.killed} alt="killed" className="tribute-image" />}
+                    <p>{result.duelResult}</p>
                 </div>
             ))}
         </div>
