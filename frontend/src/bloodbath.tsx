@@ -23,6 +23,37 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
 
     }
 
+    function selectEvent() { // Function to select a random event
+        const randomEvent = Math.floor(Math.random() * 7 + 1); // Generate a random number to select event
+
+        switch (randomEvent) { // Switch case based on random event
+            case 1: // If random event is 1, call duel function
+                duel();
+                break;
+            case 2: // If random event is 2, call grabWeapon function
+                grabWeapon();
+                break;
+            case 3: // If random event is 2, call grabWeapon function
+                grabSupplies();
+                break;
+            case 4: // If random event is 2, call grabWeapon function
+                taunt();
+                break;
+            case 5: // If random event is 2, call grabWeapon function
+                selfDeath();
+                break;
+            case 6: // If random event is 2, call grabWeapon function
+                steal();
+                break;
+            case 7: // If random event is 2, call grabWeapon function
+                goofOff();
+                break;
+            default:
+                // Handle unexpected cases
+                break;
+        }
+    }
+
     function feast() {
 
         let result: React.ReactNode = (
@@ -130,34 +161,6 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
             }
         ]);
 
-    }
-
-    function selectEvent() { // Function to select a random event
-        const randomEvent = Math.floor(Math.random() * 6 + 1); // Generate a random number to select event
-
-        switch (randomEvent) { // Switch case based on random event
-            case 1: // If random event is 1, call duel function
-                duel();
-                break;
-            case 2: // If random event is 2, call grabWeapon function
-                grabWeapon();
-                break;
-            case 3: // If random event is 2, call grabWeapon function
-                grabSupplies();
-                break;
-            case 4: // If random event is 2, call grabWeapon function
-                taunt();
-                break;
-            case 5: // If random event is 2, call grabWeapon function
-                selfDeath();
-                break;
-            case 6: // If random event is 2, call grabWeapon function
-                steal();
-                break;
-            default:
-                // Handle unexpected cases
-                break;
-        }
     }
 
     function duel() { // Function to simulate a duel
@@ -351,6 +354,22 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
         ]);
 
         setCookieArray([...cookieArray]); // Update the state with the modified array to trigger a re-render
+    }
+
+    function goofOff() {
+        const randomIndex = Math.floor(Math.random() * cookieArray.length); // Get a random index for selecting a cookie
+        const randomCookie = cookieArray[randomIndex]; // Get the selected cookie
+
+        let result: React.ReactNode = <><strong>{randomCookie.name}</strong> fooled around</>; // Generate grab supplies result message
+
+        setOutput(prevResults => [ // Update simulation output with grab supplies result
+            ...prevResults,
+            {
+                Cookie1: randomCookie.picture,
+                Cookie2: "empty",
+                result: result
+            }
+        ]);
     }
 
     return (
