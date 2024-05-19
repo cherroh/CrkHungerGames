@@ -134,3 +134,16 @@ strong {
   font-weight: bold;
   color: rgb(251, 130, 0);
 }
+
+.feastlabel {
+  text-align: center;
+  border: 1px solid #fff;
+  background: #232323;
+  margin-left: 0px;
+  margin-right: auto;
+  color: #ffcf27;
+  display: inline-block;
+  padding: 5px;
+  margin-top: 0px; /* Reduce space between text and top edge of the box */
+  margin-bottom: 20px; /* Reduce space between text and bottom edge of the box */
+}

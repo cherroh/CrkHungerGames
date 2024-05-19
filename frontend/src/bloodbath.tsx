@@ -26,7 +26,7 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
     function feast() {
 
         let result: React.ReactNode = (
-            <div className="bloodbathlabel">
+            <div className="feastlabel">
                 A Feast Began
             </div>
         );
