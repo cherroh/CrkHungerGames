@@ -7,12 +7,21 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
     const [simulationReady, setSimulationReady] = useState(true); // Initialize state for simulation readiness
     const [output, setOutput] = useState<{ Cookie1: string; Cookie2: string; result: React.ReactNode; }[]>([]); // Initialize state for simulation output
 
-    function beginSimulation() { // Function to begin simulation
+    function beginSimulation() {
         setSimulationReady(false); // Set simulation readiness state to false
-        feast();
+        let days = 0; // Initialize the days counter outside the loop
+    
         while (cookieArray.length > 1) { // Loop until only one cookie remains in the array
+            if (days % 35 === 0) { // Check if it's the 7th day
+                feast(); // Call feast function on every 7th day
+            }
+    
             selectEvent(); // Perform a simulation step
+            days++; // Increment the days counter
         }
+    
+        feast(); // Call feast function after the loop ends
+        selectEvent(); // Perform one last event after the loop ends
     }
 
     function feast() {
