@@ -26,19 +26,18 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
 
     function feast() {
         const feastCookies = cookieArray.filter(_ => Math.random() < 0.5);
-
+    
         // Separate cookies that stayed at the feast and those who didn't
         const leftFeastCookies = cookieArray.filter(cookie => !feastCookies.includes(cookie));
-
+    
         // Output for cookies that left the feast
         leftFeastCookies.forEach(currentCookie => {
-
             let result2: React.ReactNode = (
                 <>
                     <strong>{currentCookie.name}</strong> left the feast
                 </>
             );
-
+    
             setOutput(prevResults => [
                 ...prevResults,
                 {
@@ -48,7 +47,7 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
                 }
             ]);
         });
-
+    
         // Process the cookies that stayed at the feast
         feastCookies.forEach(currentCookie => {
             const outcome = Math.random() < 0.5; // Determine if the current cookie gains health (true) or takes damage (false)
@@ -63,10 +62,10 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
                     }
                 ]);
             } else {
-                const randomIndex = Math.floor(Math.random() * feastCookies.length); // Get a random index for selecting another cookie
-                const damagingCookie = feastCookies[randomIndex]; // Get the damaging cookie
+                // Get the damaging cookie excluding the current cookie
+                const damagingCookie = feastCookies.filter(cookie => cookie !== currentCookie)[Math.floor(Math.random() * (feastCookies.length - 1))];
                 currentCookie.health -= damagingCookie.damage; // Take damage
-
+    
                 let result: React.ReactNode = (
                     <>
                         <strong>{damagingCookie.name}</strong> stabbed <strong>{currentCookie.name}</strong> (they have {currentCookie.health} hp now)
@@ -79,7 +78,7 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
                         )}
                     </>
                 );
-
+    
                 setOutput(prevResults => [
                     ...prevResults,
                     {
@@ -90,8 +89,7 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
                 ]);
             }
         });
-
-    }
+    }    
 
     function selectEvent() { // Function to select a random event
         const randomEvent = Math.floor(Math.random() * 5 + 1); // Generate a random number to select event
