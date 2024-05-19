@@ -147,3 +147,9 @@ strong {
   margin-top: 10px; /* Reduce space between text and top edge of the box */
   margin-bottom: 20px; /* Reduce space between text and bottom edge of the box */
 }
+
+button:hover {
+  background-color: #2e2e2e; /* Change background color to white */
+  color: #ffd53f; /* Change text color to dark */
+  text-decoration: underline; /* Underline the text */
+}
