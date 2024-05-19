@@ -13,7 +13,7 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
 
         while (cookieArray.length > 1) { // Loop until only one cookie remains in the array
             if (days % 100 === 0 && cookieArray.length > 4) { // Check if it's the 7th day
-                feast(); // Call feast function on every 7th day
+                feast(days); // Call feast function on every 7th day
             }
             if (cookieArray.length > 1) {
                 selectEvent(); // Perform a simulation step
@@ -54,7 +54,17 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
         }
     }
 
-    function feast() {
+    type CookieType = {
+        name: string;
+        health: number;
+        damage: number;
+        weapon: string;
+        isAlive: boolean;
+        picture: string; // Assuming 'picture' is a property of a cookie object
+        // Add any other properties if necessary
+    };
+
+    function feast(days: number) {
 
         const weapons = [
             { weaponName: "stick", weaponDamage: 10 },
@@ -118,20 +128,22 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
             "explosives": ["landmines", "bombs"]
         };
 
-        let result: React.ReactNode = (
-            <div className="feastlabel">
-                A Feast Began
-            </div>
-        );
+        if (days > 0) {
+            let result: React.ReactNode = (
+                <div className="feastlabel">
+                    A Feast Began
+                </div>
+            );
 
-        setOutput(prevResults => [
-            ...prevResults,
-            {
-                Cookie1: "empty",
-                Cookie2: "empty",
-                result: result
-            }
-        ]);
+            setOutput(prevResults => [
+                ...prevResults,
+                {
+                    Cookie1: "empty",
+                    Cookie2: "empty",
+                    result: result
+                }
+            ]);
+        }
 
         const feastCookies = cookieArray.filter(_ => Math.random() < 0.5);
 
@@ -142,7 +154,7 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
         leftFeastCookies.forEach(currentCookie => {
             let result2: React.ReactNode = (
                 <>
-                    <strong>{currentCookie.name}</strong> left the feast
+                    <strong>{currentCookie.name}</strong> runs away and leaves the cornucopia
                 </>
             );
 
@@ -167,7 +179,7 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
                         {
                             Cookie1: currentCookie.picture,
                             Cookie2: "empty",
-                            result: <><strong>{currentCookie.name}</strong> ate well</>
+                            result: <><strong>{currentCookie.name}</strong> grabs some supplies</>
                         }
                     ]);
                 } else if (outcome < 0.67) {
@@ -194,7 +206,11 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
                     ]);
                 } else {
                     // Get the damaging cookie excluding the current cookie
-                    const damagingCookie = feastCookies.filter(cookie => cookie !== currentCookie)[Math.floor(Math.random() * (feastCookies.length - 1))];
+                    let damagingCookie: CookieType | undefined;
+                    do {
+                        damagingCookie = feastCookies.filter(cookie => cookie !== currentCookie)[Math.floor(Math.random() * (feastCookies.length - 1))];
+                    } while (damagingCookie && !damagingCookie.isAlive);
+
                     currentCookie.health -= damagingCookie.damage; // Take damage
 
                     let eventMessage = "";
@@ -242,12 +258,8 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
                     if (currentCookie.health <= 0) { // Check if the killed cookie is dead
                         currentCookie.isAlive = false; // Mark killed cookie as not alive
                         const index = cookieArray.findIndex(cookie => cookie.name === currentCookie.name); // Find the index of the currentCookie in cookieArray
-                        const index2 = feastCookies.findIndex(cookie => cookie.name === currentCookie.name);
                         if (index !== -1) { // Ensure the cookie exists in cookieArray
                             cookieArray.splice(index, 1); // Remove the killed cookie from the array
-                        }
-                        if (index2 !== -1) { // Ensure the cookie exists in cookieArray
-                            feastCookies.splice(index2, 1); // Remove the killed cookie from the array
                         }
                     }
 
@@ -267,20 +279,37 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
             setCookieArray([...feastCookies]);
         });
 
-        let result2: React.ReactNode = (
-            <div className="feastlabel">
-                The Feast Ended
-            </div>
-        );
+        if (days > 0) {
+            let result2: React.ReactNode = (
+                <div className="feastlabel">
+                    The Feast Ended
+                </div>
+            );
 
-        setOutput(prevResults => [
-            ...prevResults,
-            {
-                Cookie1: "empty",
-                Cookie2: "empty",
-                result: result2
-            }
-        ]);
+            setOutput(prevResults => [
+                ...prevResults,
+                {
+                    Cookie1: "empty",
+                    Cookie2: "empty",
+                    result: result2
+                }
+            ]);
+        } else {
+            let result2: React.ReactNode = (
+                <div className="feastlabel">
+                    The Bloodbath Ended
+                </div>
+            );
+
+            setOutput(prevResults => [
+                ...prevResults,
+                {
+                    Cookie1: "empty",
+                    Cookie2: "empty",
+                    result: result2
+                }
+            ]);
+        }
 
     }
 
@@ -700,9 +729,11 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
 
     return (
         <div className="bloodbath">
-            <div className="bloodbathlabel">
-                <p>The Bloodbath</p>
-            </div>
+            {!simulationReady && (
+                <div className="bloodbathlabel">
+                    <p>The Bloodbath Begins</p>
+                </div>
+            )}
             {simulationReady && <button onClick={beginSimulation} className="begin-button">Begin Simulation</button>}
             {output.map((result, index) => (
                 <div key={index}>
