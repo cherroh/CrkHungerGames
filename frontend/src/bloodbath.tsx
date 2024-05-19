@@ -178,19 +178,23 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
         const meleeEvents = [
             "{attacker} stabs {target} with a {weapon}",
             "{attacker} slashes {target} with a {weapon}",
-            "{attacker} hits {target} with a {weapon}"
+            "{attacker} slaps {target} with a {weapon}",
+            "{attacker} impales {target} with a {weapon}",
+            "{attacker} shoves a {weapon} up {target}'s abdomen"
         ];
 
         const rangedEvents = [
             "{attacker} shoots {target} with a {weapon}",
-            "{attacker} fires at {target} with a {weapon}",
-            "{attacker} snipes {target} with a {weapon}"
+            "{attacker} snipes {target} with a {weapon}",
+            "{attacker} taunts {target}, then shoots them with a {weapon}"
         ];
 
         const explosiveEvents = [
             "{attacker} blows up {target} with {weapon}",
             "{attacker} detonates {weapon} near {target}",
-            "{attacker} plants {weapon} and it explodes on {target}"
+            "{attacker} throws {weapon} at {target} and it explodes",
+            "{attacker} throws {weapon} at {target}'s face and it explodes",
+            "{attacker} hides {weapon} in {target}'s pants and it explodes"
         ];
 
         const weaponClasses = {
