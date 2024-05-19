@@ -44,7 +44,7 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
         } while (randomCookieKilled === randomCookieKiller); // Repeat loop if same cookie is selected as both killed and killer
 
         randomCookieKilled.health -= randomCookieKiller.damage; // Reduce health of the killed cookie by killer's damage
-        let duelResult = `${randomCookieKiller.name} stabbed ${randomCookieKilled.name} cookie`; // Generate duel result message
+        let duelResult = `${randomCookieKiller.name} stabbed ${randomCookieKilled.name}`; // Generate duel result message
 
         if (randomCookieKilled.health <= 0) { // Check if the killed cookie is dead
             randomCookieKilled.isAlive = false; // Mark killed cookie as not alive
@@ -88,18 +88,24 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
         ]);
     }
 
-    return ( // Render Bloodbath component
-        <div className="bloodbath"> {/* Bloodbath container */}
-            <div className="bloodbathlabel"> {/* Bloodbath label */}
-                <p>The Bloodbath</p> {/* Bloodbath title */}
+    return (
+        <div className="bloodbath">
+            <div className="bloodbathlabel">
+                <p>The Bloodbath</p>
             </div>
-            <Reaping /> {/* Include the Reaping component */}
-            {simulationReady && <button onClick={beginSimulation} className="begin-button">Begin Simulation</button>} {/* Render Begin Simulation button if simulation is ready */}
+            <Reaping />
+            {simulationReady && <button onClick={beginSimulation} className="begin-button">Begin Simulation</button>}
             {output.map((result, index) => (
                 <div key={index}>
-                    <img src={result.killer} alt="killer" className="tribute-image" />
+                    {result.killer !== "empty" && <img src={result.killer} alt="killer" className="tribute-image" />}
                     {result.killed !== "empty" && <img src={result.killed} alt="killed" className="tribute-image" />}
                     <p>{result.duelResult}</p>
+                    {cookieArray.length === 1 && index === output.length - 1 && (
+                        <div>
+                            <img src={cookieArray[0].picture} alt="winner" className="tribute-image" />
+                            <p>The last one standing is {cookieArray[0].name}! {cookieArray[0].name} is the Winner!</p>
+                        </div>
+                    )}
                 </div>
             ))}
         </div>
