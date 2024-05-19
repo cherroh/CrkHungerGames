@@ -23,36 +23,28 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
 
     }
 
-    function selectEvent() { // Function to select a random event
-        const randomEvent = Math.floor(Math.random() * 7 + 1); // Generate a random number to select event
-
-        switch (randomEvent) { // Switch case based on random event
-            case 1: // If random event is 1, call duel function
-                duel();
-                break;
-            case 2: // If random event is 2, call grabWeapon function
-                grabWeapon();
-                break;
-            case 3: // If random event is 2, call grabWeapon function
-                grabSupplies();
-                break;
-            case 4: // If random event is 2, call grabWeapon function
-                taunt();
-                break;
-            case 5: // If random event is 2, call grabWeapon function
-                selfDeath();
-                break;
-            case 6: // If random event is 2, call grabWeapon function
-                steal();
-                break;
-            case 7: // If random event is 2, call grabWeapon function
-                goofOff();
-                break;
-            default:
-                // Handle unexpected cases
-                break;
+    function selectEvent() {
+        const randomProbability = Math.random(); // Generate a random number between 0 and 1
+    
+        if (randomProbability < 0.3) {
+            duel(); // 30% chance
+        } else if (randomProbability < 0.4) {
+            grabWeapon(); // 10% chance
+        } else if (randomProbability < 0.5) {
+            grabSupplies(); // 10% chance
+        } else if (randomProbability < 0.6) {
+            taunt(); // 10% chance
+        } else if (randomProbability < 0.8) {
+            selfDeath(); // 20% chance
+        } else if (randomProbability < 0.9) {
+            steal(); // 10% chance
+        } else if (randomProbability < 1){
+            goofOff(); // 10% chance
+        } else {
+            alert("the website broke");
+            window.location.reload();
         }
-    }
+    }    
 
     type CookieType = {
         name: string;
