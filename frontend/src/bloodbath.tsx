@@ -133,7 +133,7 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
     }
 
     function selectEvent() { // Function to select a random event
-        const randomEvent = Math.floor(Math.random() * 5 + 1); // Generate a random number to select event
+        const randomEvent = Math.floor(Math.random() * 6 + 1); // Generate a random number to select event
 
         switch (randomEvent) { // Switch case based on random event
             case 1: // If random event is 1, call duel function
@@ -150,6 +150,9 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
                 break;
             case 5: // If random event is 2, call grabWeapon function
                 selfDeath();
+                break;
+            case 6: // If random event is 2, call grabWeapon function
+                steal();
                 break;
             default:
                 // Handle unexpected cases
@@ -308,6 +311,41 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
             {
                 Cookie1: randomCookie1.picture,
                 Cookie2: "empty",
+                result: result
+            }
+        ]);
+
+        setCookieArray([...cookieArray]); // Update the state with the modified array to trigger a re-render
+    }
+
+    function steal() {
+        let randomIndexCookie2 = Math.floor(Math.random() * cookieArray.length); // Get a random index for the cookie to be killed
+        let randomCookie2 = cookieArray[randomIndexCookie2]; // Get the killed cookie
+
+        let randomIndexCookie1; // Initialize variable for killer index
+        let randomCookie1; // Initialize variable for killer cookie
+
+        do { // Loop until a different cookie is selected as the killer
+            randomIndexCookie1 = Math.floor(Math.random() * cookieArray.length); // Get a random index for the killer cookie
+            randomCookie1 = cookieArray[randomIndexCookie1]; // Get the killer cookie
+        } while (randomCookie2 === randomCookie1); // Repeat loop if same cookie is selected as both killed and killer
+
+        randomCookie2.damage -= 50; // Reduce health of the killed cookie by killer's damage
+        if (randomCookie2.damage < 0) {
+            randomCookie2.damage = 0;
+        }
+
+        let result: React.ReactNode = (
+            <>
+                <strong>{randomCookie1.name}</strong> stole from <strong>{randomCookie2.name}</strong> (they have {randomCookie2.damage} damage now)
+            </>
+        );
+
+        setOutput(prevResults => [ // Update simulation output with duel result
+            ...prevResults,
+            {
+                Cookie1: randomCookie1.picture,
+                Cookie2: randomCookie2.picture,
                 result: result
             }
         ]);
