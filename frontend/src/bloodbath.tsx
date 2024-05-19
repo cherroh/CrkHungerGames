@@ -163,10 +163,6 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
             <div className="bloodbathlabel">
                 <p>The Bloodbath</p>
             </div>
-            <div>
-                <img src={cookieArray[0].picture} alt="winner" className="tribute-image" />
-                <p>The last one standing is {cookieArray[0].name}! {cookieArray[0].name} is the Winner!</p>
-            </div>
             {simulationReady && <button onClick={beginSimulation} className="begin-button">Begin Simulation</button>}
             {output.map((result, index) => (
                 <div key={index}>

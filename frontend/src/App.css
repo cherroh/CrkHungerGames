@@ -97,7 +97,7 @@ img.logo {
   width: 660px;
   position: absolute;
   margin-top: -58px;
-  left: 220px;
+  left: 170px;
   float: left;
   margin-left: auto;
   margin-right: auto;
@@ -109,18 +109,18 @@ img.logo {
   text-align: center;
   border: 1px solid #fff;
   background: #232323;
-  margin-left: 244px;
+  margin-left: 0px;
   margin-right: auto;
   color: #ffcf27;
   display: inline-block;
   padding: 5px;
-  margin-top: 20px; /* Reduce space between text and top edge of the box */
+  margin-top: 60px; /* Reduce space between text and top edge of the box */
   margin-bottom: 20px; /* Reduce space between text and bottom edge of the box */
 }
 
 .begin-button {
   display: block;
-  margin-left: 255.5px;
+  margin-left: 290px;
   margin-top: 10px;
   margin-bottom: 10px;
   text-align: center;
