@@ -445,19 +445,43 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
     }
 
     function goofOff() {
-        const randomIndex = Math.floor(Math.random() * cookieArray.length); // Get a random index for selecting a cookie
-        const randomCookie = cookieArray[randomIndex]; // Get the selected cookie
+        // Array of possible goof-off events
+        const events = [
+            "camouflages themself in the bushes",
+            "constructs a hut made out of grass",
+            "creates a stick made out of sticks, it's useless though",
+            "creates a robust axe made out of grass, it's a failure",
+            "fishes, unfortunately all the fish are fishgato",
+            "does absolutely nothing for 10 minutes",
+            "privately takes out their smuggled illegal rainbow cubes and snorts them",
+            "starts a fire but it spreads a bit too much",
+            "lights the forest on fire for literally no good reason",
+            "looks a bit green, due to an infection",
+            "thinks about how bad frost flop is"
+        ];
 
-        let result: React.ReactNode = <><strong>{randomCookie.name}</strong> fooled around</>; // Generate grab supplies result message
+        const randomEventIndex = Math.floor(Math.random() * events.length); // Randomly select an event index
+        const randomEvent = events[randomEventIndex]; // Get the selected event
 
-        setOutput(prevResults => [ // Update simulation output with grab supplies result
+        const randomIndexCookie1 = Math.floor(Math.random() * cookieArray.length); // Get a random index for the cookie to goof off
+        const randomCookie1 = cookieArray[randomIndexCookie1]; // Get the goofing off cookie
+
+        let result: React.ReactNode = (
+            <>
+                <strong>{randomCookie1.name}</strong> {randomEvent}
+            </>
+        );
+
+        setOutput(prevResults => [ // Update simulation output with the event result
             ...prevResults,
             {
-                Cookie1: randomCookie.picture,
+                Cookie1: randomCookie1.picture,
                 Cookie2: "empty",
                 result: result
             }
         ]);
+
+        setCookieArray([...cookieArray]); // Update the state with the modified array to trigger a re-render
     }
 
     return (
