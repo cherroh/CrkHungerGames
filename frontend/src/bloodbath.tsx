@@ -15,7 +15,7 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
     }
 
     function selectEvent() { // Function to select a random event
-        const randomEvent = Math.floor(Math.random() * 4 + 1); // Generate a random number to select event
+        const randomEvent = Math.floor(Math.random() * 5 + 1); // Generate a random number to select event
 
         switch (randomEvent) { // Switch case based on random event
             case 1: // If random event is 1, call duel function
@@ -29,6 +29,9 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
                 break;
             case 4: // If random event is 2, call grabWeapon function
                 taunt();
+                break;
+            case 5: // If random event is 2, call grabWeapon function
+                selfDeath();
                 break;
             default:
                 // Handle unexpected cases
@@ -151,6 +154,42 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
             {
                 Cookie1: randomCookie1.picture,
                 Cookie2: randomCookie2.picture,
+                result: result
+            }
+        ]);
+
+        setCookieArray([...cookieArray]); // Update the state with the modified array to trigger a re-render
+    }
+
+    function selfDeath() {
+        let randomIndexCookie1 = Math.floor(Math.random() * cookieArray.length); // Get a random index for the cookie to be killed
+        let randomCookie1 = cookieArray[randomIndexCookie1]; // Get the killed cookie
+
+        randomCookie1.health -= 50; // Reduce health of the killed cookie by killer's damage
+
+        let result: React.ReactNode = (
+            <>
+                <strong>{randomCookie1.name}</strong> hurt themself (they have {randomCookie1.health} hp now)
+                {randomCookie1.health <= 0 && (
+                    <>
+                        {', '}
+                        <strong>{randomCookie1.name}</strong>
+                        {' died'}
+                    </>
+                )}
+            </>
+        );
+
+        if (randomCookie1.health <= 0) { // Check if the killed cookie is dead
+            randomCookie1.isAlive = false; // Mark killed cookie as not alive
+            cookieArray.splice(randomIndexCookie1, 1); // Remove the killed cookie from the array
+        }
+
+        setOutput(prevResults => [ // Update simulation output with duel result
+            ...prevResults,
+            {
+                Cookie1: randomCookie1.picture,
+                Cookie2: "empty",
                 result: result
             }
         ]);
