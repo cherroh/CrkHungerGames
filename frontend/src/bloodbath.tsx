@@ -9,9 +9,79 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
 
     function beginSimulation() { // Function to begin simulation
         setSimulationReady(false); // Set simulation readiness state to false
+        feast();
         while (cookieArray.length > 1) { // Loop until only one cookie remains in the array
             selectEvent(); // Perform a simulation step
         }
+    }
+
+    function feast() {
+        const feastCookies = cookieArray.filter(_ => Math.random() < 0.5);
+
+        // Separate cookies that stayed at the feast and those who didn't
+        const leftFeastCookies = cookieArray.filter(cookie => !feastCookies.includes(cookie));
+
+        // Output for cookies that left the feast
+        leftFeastCookies.forEach(currentCookie => {
+
+            let result2: React.ReactNode = (
+                <>
+                    <strong>{currentCookie.name}</strong> left the feast
+                </>
+            );
+
+            setOutput(prevResults => [
+                ...prevResults,
+                {
+                    Cookie1: currentCookie.picture,
+                    Cookie2: "empty",
+                    result: result2
+                }
+            ]);
+        });
+
+        // Process the cookies that stayed at the feast
+        feastCookies.forEach(currentCookie => {
+            const outcome = Math.random() < 0.5; // Determine if the current cookie gains health (true) or takes damage (false)
+            if (outcome) {
+                currentCookie.health += 50; // Gain health
+                setOutput(prevResults => [
+                    ...prevResults,
+                    {
+                        Cookie1: currentCookie.picture,
+                        Cookie2: "empty",
+                        result: <><strong>{currentCookie.name}</strong> ate well</>
+                    }
+                ]);
+            } else {
+                const randomIndex = Math.floor(Math.random() * feastCookies.length); // Get a random index for selecting another cookie
+                const damagingCookie = feastCookies[randomIndex]; // Get the damaging cookie
+                currentCookie.health -= damagingCookie.damage; // Take damage
+
+                let result: React.ReactNode = (
+                    <>
+                        <strong>{damagingCookie.name}</strong> stabbed <strong>{currentCookie.name}</strong> (they have {currentCookie.health} hp now)
+                        {currentCookie.health <= 0 && (
+                            <>
+                                {', '}
+                                <strong>{currentCookie.name}</strong>
+                                {' died'}
+                            </>
+                        )}
+                    </>
+                );
+
+                setOutput(prevResults => [
+                    ...prevResults,
+                    {
+                        Cookie1: damagingCookie.picture,
+                        Cookie2: currentCookie.picture,
+                        result: result
+                    }
+                ]);
+            }
+        });
+
     }
 
     function selectEvent() { // Function to select a random event
