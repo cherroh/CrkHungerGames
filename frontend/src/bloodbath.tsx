@@ -207,7 +207,11 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
         setCookieArray([...cookieArray]); // Update the state with the modified array to trigger a re-render
     }
 
-    function grabWeapon() { // Function to simulate grabbing a weapon
+    function grabWeapon() {
+        const weapons = ["sword", "axe", "bow", "staff", "dagger"]; // Array of possible weapons
+        const randomWeaponIndex = Math.floor(Math.random() * weapons.length); // Randomly select a weapon index
+        const randomWeapon = weapons[randomWeaponIndex]; // Get the selected weapon
+
         const randomIndex = Math.floor(Math.random() * cookieArray.length); // Get a random index for selecting a cookie
         const randomCookie = cookieArray[randomIndex]; // Get the selected cookie
 
@@ -219,9 +223,9 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
             return updatedCookies;
         });
 
-        let result: React.ReactNode = <><strong>{randomCookie.name}</strong> grabbed a sword</>; // Generate grab weapon result message
+        let result: React.ReactNode = <><strong>{randomCookie.name}</strong> grabbed a {randomWeapon}</>; // Generate grab weapon result message with chosen weapon
 
-        setOutput(prevResults => [ // Update simulation output with duel result
+        setOutput(prevResults => [ // Update simulation output with grab weapon result
             ...prevResults,
             {
                 Cookie1: randomCookie.picture,
