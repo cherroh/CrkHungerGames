@@ -310,26 +310,39 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
         ]);
     }
 
-
     function taunt() {
-        let randomIndexCookie2 = Math.floor(Math.random() * cookieArray.length); // Get a random index for the cookie to be killed
-        let randomCookie2 = cookieArray[randomIndexCookie2]; // Get the killed cookie
+        // Array of possible taunt events
+        const events = [
+            "flips off {target} and runs away",
+            "makes fun of {target}",
+            "trips {target} and laughs at them",
+            "uses pepper spray on {target} and laughs at them",
+            "insults {target}"
+        ];
 
-        let randomIndexCookie1; // Initialize variable for killer index
-        let randomCookie1; // Initialize variable for killer cookie
+        const randomEventIndex = Math.floor(Math.random() * events.length); // Randomly select an event index
+        const randomEvent = events[randomEventIndex]; // Get the selected event
 
-        do { // Loop until a different cookie is selected as the killer
-            randomIndexCookie1 = Math.floor(Math.random() * cookieArray.length); // Get a random index for the killer cookie
-            randomCookie1 = cookieArray[randomIndexCookie1]; // Get the killer cookie
-        } while (randomCookie2 === randomCookie1); // Repeat loop if same cookie is selected as both killed and killer
+        let randomIndexCookie2 = Math.floor(Math.random() * cookieArray.length); // Get a random index for the cookie to be taunted
+        let randomCookie2 = cookieArray[randomIndexCookie2]; // Get the taunted cookie
+
+        let randomIndexCookie1; // Initialize variable for the taunter's index
+        let randomCookie1; // Initialize variable for the taunter cookie
+
+        do { // Loop until a different cookie is selected as the taunter
+            randomIndexCookie1 = Math.floor(Math.random() * cookieArray.length); // Get a random index for the taunter cookie
+            randomCookie1 = cookieArray[randomIndexCookie1]; // Get the taunter cookie
+        } while (randomCookie2 === randomCookie1); // Repeat loop if the same cookie is selected as both taunter and taunted
+
+        const eventMessage = randomEvent.replace("{target}", randomCookie2.name);
 
         let result: React.ReactNode = (
             <>
-                <strong>{randomCookie1.name}</strong> makes fun of <strong>{randomCookie2.name}</strong>
+                <strong>{randomCookie1.name}</strong> {eventMessage}
             </>
         );
 
-        setOutput(prevResults => [ // Update simulation output with duel result
+        setOutput(prevResults => [ // Update simulation output with taunt result
             ...prevResults,
             {
                 Cookie1: randomCookie1.picture,
