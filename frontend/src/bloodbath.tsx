@@ -101,25 +101,25 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
         ];
 
         const meleeEvents = [
-            "{attacker} stabs {target} with a {weapon}",
-            "{attacker} slashes {target} with a {weapon}",
-            "{attacker} slaps {target} with a {weapon}",
-            "{attacker} impales {target} with a {weapon}",
-            "{attacker} shoves a {weapon} up {target}'s abdomen"
+            "stabs {target} with a {weapon}",
+            "slashes {target} with a {weapon}",
+            "slaps {target} with a {weapon}",
+            "impales {target} with a {weapon}",
+            "shoves a {weapon} up {target}'s abdomen"
         ];
 
         const rangedEvents = [
-            "{attacker} shoots {target} with a {weapon}",
-            "{attacker} snipes {target} with a {weapon}",
-            "{attacker} taunts {target}, then shoots them with a {weapon}"
+            "shoots {target} with a {weapon}",
+            "snipes {target} with a {weapon}",
+            "taunts {target}, then shoots them with a {weapon}"
         ];
 
         const explosiveEvents = [
-            "{attacker} blows up {target} with {weapon}",
-            "{attacker} detonates {weapon} near {target}",
-            "{attacker} throws {weapon} at {target} and it explodes",
-            "{attacker} throws {weapon} at {target}'s face and it explodes",
-            "{attacker} hides {weapon} in {target}'s pants and it explodes"
+            "blows up {target} with {weapon}",
+            "detonates {weapon} near {target}",
+            "throws {weapon} at {target} and it explodes",
+            "throws {weapon} at {target}'s face and it explodes",
+            "hides {weapon} in {target}'s pants and it explodes"
         ];
 
         const weaponClasses = {
@@ -131,7 +131,7 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
         if (days > 0) {
             let result: React.ReactNode = (
                 <div className="feastlabel">
-                    A Feast Began
+                    A Feast Begins
                 </div>
             );
 
@@ -237,7 +237,6 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
 
                         const randomEventIndex = Math.floor(Math.random() * eventArray.length);
                         eventMessage = eventArray[randomEventIndex]
-                            .replace("{attacker}", damagingCookie.name)
                             .replace("{target}", currentCookie.name)
                             .replace("{weapon}", damagingCookie.weapon);
                     }
@@ -303,7 +302,7 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
         } else {
             let result2: React.ReactNode = (
                 <div className="feastlabel">
-                    The Bloodbath Ended
+                    The Bloodbath Ends
                 </div>
             );
 
@@ -504,8 +503,8 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
         ];
 
         const supplyMessages: { [key: string]: string } = {
-            "unknown sponsor": "received supplies from an unknown sponsor",
-            "illegal rainbow sugar cubes": "received illegal rainbow sugar cubes and snorted them"
+            "unknown sponsor": "receives supplies from an unknown sponsor",
+            "illegal rainbow sugar cubes": "receives illegal rainbow sugar cubes and snorts them"
         };
 
         const randomSupplyIndex = Math.floor(Math.random() * supplies.length); // Randomly select a supply index
@@ -660,7 +659,7 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
     function steal() {
         // Array of possible steal events
         const events = [
-            "stole from {target}'s supplies",
+            "steals from {target}'s supplies",
             "destroys {target}'s supplies"
         ];
 
