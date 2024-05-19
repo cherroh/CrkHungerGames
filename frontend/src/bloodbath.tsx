@@ -164,6 +164,41 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
     }
 
     function duel() { // Function to simulate a duel
+        const noWeaponEvents = [
+            "holds {target}'s head under a lake",
+            "holds {target}'s head under a river",
+            "strangles {target}",
+            "and {target} engage in a fist fight",
+            "bashes {target}'s head into a rock several times",
+            "twists {target}'s neck",
+            "pushes {target} off a cliff",
+            "sneaks up on {target} and beats them up"
+        ];
+
+        const meleeEvents = [
+            "{attacker} stabs {target} with a {weapon}",
+            "{attacker} slashes {target} with a {weapon}",
+            "{attacker} hits {target} with a {weapon}"
+        ];
+
+        const rangedEvents = [
+            "{attacker} shoots {target} with a {weapon}",
+            "{attacker} fires at {target} with a {weapon}",
+            "{attacker} snipes {target} with a {weapon}"
+        ];
+
+        const explosiveEvents = [
+            "{attacker} blows up {target} with {weapon}",
+            "{attacker} detonates {weapon} near {target}",
+            "{attacker} plants {weapon} and it explodes on {target}"
+        ];
+
+        const weaponClasses = {
+            "melee": ["stick", "shovel", "axe", "knife", "sword", "spear"],
+            "ranged": ["bow", "gun"],
+            "explosives": ["landmines", "bombs"]
+        };
+
         let randomIndexCookie2 = Math.floor(Math.random() * cookieArray.length); // Get a random index for the cookie to be killed
         let randomCookie2 = cookieArray[randomIndexCookie2]; // Get the killed cookie
 
@@ -177,9 +212,38 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
 
         randomCookie2.health -= randomCookie1.damage; // Reduce health of the killed cookie by killer's damage
 
-        let result: React.ReactNode = (
+        let eventMessage = "";
+        if (!randomCookie1.weapon || randomCookie1.weapon === "none") {
+            const randomEventIndex = Math.floor(Math.random() * noWeaponEvents.length);
+            eventMessage = noWeaponEvents[randomEventIndex].replace("{target}", randomCookie2.name);
+        } else {
+            let weaponClass: keyof typeof weaponClasses = "melee"; // Explicit type declaration
+            for (let key in weaponClasses) {
+                if (weaponClasses[key as keyof typeof weaponClasses].includes(randomCookie1.weapon)) { // Type assertion
+                    weaponClass = key as keyof typeof weaponClasses;
+                    break;
+                }
+            }
+
+            let eventArray: string[] = []; // Initialize eventArray
+            if (weaponClass === "melee") {
+                eventArray = meleeEvents;
+            } else if (weaponClass === "ranged") {
+                eventArray = rangedEvents;
+            } else if (weaponClass === "explosives") {
+                eventArray = explosiveEvents;
+            }
+
+            const randomEventIndex = Math.floor(Math.random() * eventArray.length);
+            eventMessage = eventArray[randomEventIndex]
+                .replace("{attacker}", randomCookie1.name)
+                .replace("{target}", randomCookie2.name)
+                .replace("{weapon}", randomCookie1.weapon);
+        }
+
+        let result = (
             <>
-                <strong>{randomCookie1.name}</strong> stabbed <strong>{randomCookie2.name}</strong> (they have {randomCookie2.health} hp now)
+                <strong>{randomCookie1.name}</strong> {eventMessage} (they have {randomCookie2.health} hp now)
                 {randomCookie2.health <= 0 && (
                     <>
                         {', '}
@@ -428,35 +492,35 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
             "stole from {target}'s supplies",
             "destroys {target}'s supplies"
         ];
-    
+
         let randomIndexCookie2 = Math.floor(Math.random() * cookieArray.length); // Get a random index for the cookie to be stolen from
         let randomCookie2 = cookieArray[randomIndexCookie2]; // Get the cookie to be stolen from
-    
+
         let randomIndexCookie1; // Initialize variable for thief index
         let randomCookie1; // Initialize variable for thief cookie
-    
+
         do { // Loop until a different cookie is selected as the thief
             randomIndexCookie1 = Math.floor(Math.random() * cookieArray.length); // Get a random index for the thief cookie
             randomCookie1 = cookieArray[randomIndexCookie1]; // Get the thief cookie
         } while (randomCookie2 === randomCookie1); // Repeat loop if the same cookie is selected as both thief and victim
-    
+
         const randomEventIndex = Math.floor(Math.random() * events.length); // Randomly select an event index
         const randomEvent = events[randomEventIndex]; // Get the selected event
-    
+
         // General damage for stealing supplies or destroying supplies
         randomCookie2.damage -= 50;
         if (randomCookie2.damage < 0) {
             randomCookie2.damage = 0;
         }
-    
+
         let eventMessage = randomEvent.replace("{target}", randomCookie2.name);
-    
+
         let result: React.ReactNode = (
             <>
                 <strong>{randomCookie1.name}</strong> {eventMessage}
             </>
         );
-    
+
         setOutput(prevResults => [ // Update simulation output with steal result
             ...prevResults,
             {
@@ -465,9 +529,9 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
                 result: result
             }
         ]);
-    
+
         setCookieArray([...cookieArray]); // Update the state with the modified array to trigger a re-render
-    }    
+    }
 
     function goofOff() {
         // Array of possible goof-off events
