@@ -104,6 +104,22 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
                 ]);
             }
         });
+
+        let result2: React.ReactNode = (
+            <div className="feastlabel">
+                The Feast Ended
+            </div>
+        );
+
+        setOutput(prevResults => [
+            ...prevResults,
+            {
+                Cookie1: "empty",
+                Cookie2: "empty",
+                result: result2
+            }
+        ]);
+
     }
 
     function selectEvent() { // Function to select a random event
