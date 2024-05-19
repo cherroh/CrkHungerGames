@@ -221,7 +221,7 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
             { weaponName: "landmines", weaponDamage: 50 },
             { weaponName: "bombs", weaponDamage: 50 },
         ];
-    
+
         const weaponMessages: { [key: string]: string } = {
             "stick": "finds a stick on the ground, then decides to use it as a weapon",
             "shovel": "finds a shovel, then decides to use it as a weapon",
@@ -234,29 +234,29 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
             "landmines": "finds some unused landmines",
             "bombs": "finds some bombs"
         };
-    
+
         const randomWeaponIndex = Math.floor(Math.random() * weapons.length); // Randomly select a weapon index
         const randomWeapon = weapons[randomWeaponIndex]; // Get the selected weapon
-    
+
         const randomIndex = Math.floor(Math.random() * cookieArray.length); // Get a random index for selecting a cookie
         const randomCookie = cookieArray[randomIndex]; // Get the selected cookie
-    
+
         randomCookie.damage += randomWeapon.weaponDamage; // Increase damage of the selected cookie by the weapon's damage
         randomCookie.weapon = randomWeapon.weaponName; // Set the cookie's weapon to the selected weapon's name
-    
+
         setCookieArray(prevCookies => { // Update the state with the modified cookie array
             const updatedCookies = [...prevCookies];
             updatedCookies[randomIndex] = { ...randomCookie }; // Ensure immutability
             return updatedCookies;
         });
-    
+
         const weaponMessage = weaponMessages[randomWeapon.weaponName];
         let result: React.ReactNode = (
             <>
                 <strong>{randomCookie.name}</strong> {weaponMessage}
             </>
         ); // Generate grab weapon result message with chosen weapon
-    
+
         setOutput(prevResults => [ // Update simulation output with grab weapon result
             ...prevResults,
             {
@@ -268,18 +268,37 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
     }
 
     function grabSupplies() {
+        // Array of possible supplies with their health benefits
+        const supplies = [
+            { supplyName: "unknown sponsor", healthBenefit: 50 },
+            { supplyName: "illegal rainbow sugar cubes", healthBenefit: 50 }
+        ];
+
+        const supplyMessages: { [key: string]: string } = {
+            "unknown sponsor": "received supplies from an unknown sponsor",
+            "illegal rainbow sugar cubes": "received illegal rainbow sugar cubes and snorted them"
+        };
+
+        const randomSupplyIndex = Math.floor(Math.random() * supplies.length); // Randomly select a supply index
+        const randomSupply = supplies[randomSupplyIndex]; // Get the selected supply
+
         const randomIndex = Math.floor(Math.random() * cookieArray.length); // Get a random index for selecting a cookie
         const randomCookie = cookieArray[randomIndex]; // Get the selected cookie
 
-        randomCookie.health += 50; // Increase health of the selected cookie by 50
+        randomCookie.health += randomSupply.healthBenefit; // Increase health of the selected cookie by the supply's health benefit
 
         setCookieArray(prevCookies => { // Update the state with the modified cookie array
             const updatedCookies = [...prevCookies];
-            updatedCookies[randomIndex] = randomCookie;
+            updatedCookies[randomIndex] = { ...randomCookie }; // Ensure immutability
             return updatedCookies;
         });
 
-        let result: React.ReactNode = <><strong>{randomCookie.name}</strong> recieved an airdrop</>; // Generate grab supplies result message
+        const supplyMessage = supplyMessages[randomSupply.supplyName];
+        let result: React.ReactNode = (
+            <>
+                <strong>{randomCookie.name}</strong> {supplyMessage}
+            </>
+        ); // Generate grab supplies result message with chosen supply
 
         setOutput(prevResults => [ // Update simulation output with grab supplies result
             ...prevResults,
@@ -290,6 +309,7 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
             }
         ]);
     }
+
 
     function taunt() {
         let randomIndexCookie2 = Math.floor(Math.random() * cookieArray.length); // Get a random index for the cookie to be killed
