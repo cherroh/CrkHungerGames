@@ -51,7 +51,7 @@ function ChangeCast({ cookies, setCookies }: { readonly cookies: CookieType[], r
     };
 
     return (
-        <div>
+        <div className="theform">
             {cookies.map((cookie, index) => (
                 <div key={index} className="form-container">
                     <h1>Tribute #{index + 1}</h1>
