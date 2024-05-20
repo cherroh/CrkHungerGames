@@ -18,14 +18,20 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
                 feast(actions); // Call feast function on every 7th day
             }
             if (actions % 20 === 0) { // Check if it's the 7th day
-                displayDay(daysCounter, time); // Call displayDay function with days and time
-                if (time === "Night") { // Check if it's night to increment daysCounter
-                    daysCounter++;
+                if (actions > 0) {
+                    if (time === "Night") { // Check if it's night to increment daysCou
+                        daysCounter++;
+                    }
+                    if (time === "Day") {
+                        time = "Night";
+                    } else {
+                        time = "Day";
+                    }
                 }
-                time = time === "Day" ? "Night" : "Day"; // Toggle time between day and night
+                displayDay(daysCounter, time); // Call displayDay function with days and time
             }
             if (cookieArray.length > 1) {
-                selectEvent(); // Perform a simulation step
+                selectEvent(time); // Perform a simulation step
                 actions++; // Increment the days counter
             }
         }
@@ -52,27 +58,85 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
         ]);
     }
 
-    function selectEvent() {
+    function selectEvent(time: string) {
         const randomProbability = Math.random(); // Generate a random number between 0 and 1
-
-        if (randomProbability < 0.3) {
-            duel(); // 30% chance
-        } else if (randomProbability < 0.4) {
-            grabWeapon(); // 10% chance
-        } else if (randomProbability < 0.5) {
-            grabSupplies(); // 10% chance
-        } else if (randomProbability < 0.6) {
-            taunt(); // 10% chance
-        } else if (randomProbability < 0.8) {
-            selfDeath(); // 20% chance
-        } else if (randomProbability < 0.9) {
-            steal(); // 10% chance
-        } else if (randomProbability < 1) {
-            goofOff(); // 10% chance
-        } else {
-            alert("the website broke");
-            window.location.reload();
+        if (time === "Day") {
+            if (randomProbability < 0.3) {
+                duel(); // 30% chance
+            } else if (randomProbability < 0.4) {
+                grabWeapon(); // 10% chance
+            } else if (randomProbability < 0.5) {
+                grabSupplies(); // 10% chance
+            } else if (randomProbability < 0.6) {
+                taunt(); // 10% chance
+            } else if (randomProbability < 0.8) {
+                selfDeath(); // 20% chance
+            } else if (randomProbability < 0.9) {
+                steal(); // 10% chance
+            } else if (randomProbability < 1) {
+                goofOff(); // 10% chance
+            } else {
+                alert("the website broke");
+                window.location.reload();
+            }
         }
+        if (time === "Night") {
+            if (randomProbability < 0.25) {
+                duel(); // 25% chance
+            } else if (randomProbability < 0.3) {
+                grabWeapon(); // 5% chance
+            } else if (randomProbability < 0.35) {
+                grabSupplies(); // 5% chance
+            } else if (randomProbability < 0.45) {
+                taunt(); // 10% chance
+            } else if (randomProbability < 0.6) {
+                selfDeath(); // 15% chance
+            } else if (randomProbability < 0.8) {
+                steal(); // 20% chance
+            } else if (randomProbability < 1) {
+                sleep(); // 10% chance
+            } else {
+                alert("the website broke");
+                window.location.reload();
+            }
+        }
+
+    }
+
+    function sleep() {
+        // Array of possible goof-off events
+        const events = [
+            "cries in their sleep",
+            "dreams about Frost Flop losing the Hunger Games",
+            "dreams about the worst update of them all: the Triple Cone Cup",
+            "dreams about the most pay-to-win update of them all: Stardust",
+            "gets a rash due to their sleeping bag",
+            "disarms an explosive that was hidden in their sleeping bag",
+            "pretends to sleep and secretly snorts illegal rainbow sugar cubes"
+        ];
+
+        const randomEventIndex = Math.floor(Math.random() * events.length); // Randomly select an event index
+        const randomEvent = events[randomEventIndex]; // Get the selected event
+
+        const randomIndexCookie1 = Math.floor(Math.random() * cookieArray.length); // Get a random index for the cookie to goof off
+        const randomCookie1 = cookieArray[randomIndexCookie1]; // Get the goofing off cookie
+
+        let result: React.ReactNode = (
+            <>
+                <strong>{randomCookie1.name}</strong> {randomEvent}
+            </>
+        );
+
+        setOutput(prevResults => [ // Update simulation output with the event result
+            ...prevResults,
+            {
+                Cookie1: randomCookie1.picture,
+                Cookie2: "empty",
+                result: result
+            }
+        ]);
+
+        setCookieArray([...cookieArray]); // Update the state with the modified array to trigger a re-render
     }
 
     type CookieType = {
