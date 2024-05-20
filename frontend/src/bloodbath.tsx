@@ -171,7 +171,7 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
             if (feastCookies.length === 0) {
                 let result2: React.ReactNode = (
                     <div className="feastlabel">
-                        The feast ends (No cookies remaining)
+                        The feast ends (No cookies attended the feast)
                     </div>
                 );
 
@@ -189,7 +189,7 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
             if (feastCookies.length === 0) {
                 let result2: React.ReactNode = (
                     <div className="feastlabel">
-                        The bloodbath ends (No cookies remaining)
+                        The bloodbath ends (All cookies left the area immediately)
                     </div>
                 );
 
