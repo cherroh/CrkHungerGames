@@ -168,7 +168,7 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
         const feastCookies = cookieArray.filter(_ => Math.random() < 0.5);
 
         if (actions > 0) {
-            if (feastCookies.length === 0) {
+            if (feastCookies.length < 2) {
                 let result2: React.ReactNode = (
                     <div className="feastlabel">
                         The feast ends (No cookies attended the feast)
@@ -186,7 +186,7 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
                 return;
             }
         } else {
-            if (feastCookies.length === 0) {
+            if (feastCookies.length < 2) {
                 let result2: React.ReactNode = (
                     <div className="feastlabel">
                         The bloodbath ends (All cookies left the area immediately)
