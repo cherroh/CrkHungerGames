@@ -1,14 +1,14 @@
-// Define the type for a cookie person
+// Define the types for all cookies
 export type CookieType = {
     name: string;
     isAlive: boolean;
     health: number;
     damage: number;
-    picture: string; // New attribute for picture
+    picture: string;
     weapon: string;
 };
   
-// Create an array of cookie people
+// The default cookie array
 const cookie: CookieType[] = [
     {
         name: "Caramel Arrow",

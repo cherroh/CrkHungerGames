@@ -1,3 +1,4 @@
+/*the whole website*/
 body {
   background: #5d5050;
   font-size: 14px;
@@ -5,16 +6,18 @@ body {
   height: 100%;
 }
 
+/*cherrow logo*/
 img.logo {
   position: absolute;
   height: 175px;
   width: 175px;
   border: 1px solid #000000;
-  float: left; /* Ensure the image floats to the left */
-  margin-right: 20px; /* Add some space between the image and the content */
-  margin-bottom: 20px; /* Add vertical space between the image and the button */
+  float: left;
+  margin-right: 20px;
+  margin-bottom: 20px;
 }
 
+/*Cookie Run Hunger Games header*/
 .headerlabel {
   position: absolute;
   text-align: center;
@@ -23,11 +26,12 @@ img.logo {
   left: 407px;
   color: #ffcf27;
   padding: 5px;
-  margin-top: 20px; /* Space between text and top edge of the box */
-  margin-bottom: 20px; /* Space between text and bottom edge of the box */
-  width: 180px; /* Set a fixed width */
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 180px;
 }
 
+/*Reset button*/
 .reset-button {
   position: absolute;
   text-align: center;
@@ -43,28 +47,30 @@ img.logo {
   margin-left: 200px;
 }
 
+/*All images of the tributes*/
 .tribute-image {
   height: 90px;
   width: 90px;
-  /*border: 1px solid #000;*/
 }
 
+/*The grid of the 24 tributes in the reaping*/
 .reaping {
   position: absolute;
   margin-top: 100px;
   margin-left: 195px;
 }
 
+/*The tributes in the reaping are stored in a table*/
 .reaping table {
   border-collapse: collapse;
 }
 
 .reaping td {
-  /*border: 1px solid #000;*/
   padding: 5px;
   text-align: center;
 }
 
+/*The names of the tributes*/
 .tribute-name {
   color: #fff;
   font-size: 11px;
@@ -74,6 +80,7 @@ img.logo {
   word-wrap: break-word;
 }
 
+/*The proceed button*/
 .proceed-button {
   margin-left: 455px;
   margin-top: 775px;
@@ -85,6 +92,7 @@ img.logo {
   color: #ffcf27;
 }
 
+/*The names of the districts*/
 .district-name {
   color: #fff;
   font-size: 16px;
@@ -117,8 +125,8 @@ img.logo {
   color: #ffcf27;
   display: inline-block;
   padding: 5px;
-  margin-top: 20px; /* Reduce space between text and top edge of the box */
-  margin-bottom: 0px; /* Reduce space between text and bottom edge of the box */
+  margin-top: 20px;
+  margin-bottom: 0px;
 }
 
 .bloodbathlabelmain {
@@ -130,8 +138,8 @@ img.logo {
   color: #ffcf27;
   display: inline-block;
   padding: 5px;
-  margin-top: 150px; /* Reduce space between text and top edge of the box */
-  margin-bottom: 22px; /* Reduce space between text and bottom edge of the box */
+  margin-top: 150px;
+  margin-bottom: 22px;
 }
 
 .begin-button {
@@ -147,6 +155,7 @@ img.logo {
   color: #ffcf27;
 }
 
+/*Used to make cookie's names orange*/
 strong {
   font-weight: bold;
   color: rgb(251, 130, 0);
@@ -161,16 +170,18 @@ strong {
   color: #ffcf27;
   display: inline-block;
   padding: 5px;
-  margin-top: 10px; /* Reduce space between text and top edge of the box */
-  margin-bottom: 10px; /* Reduce space between text and bottom edge of the box */
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
+/*All buttons change to this when hovered by the mouse*/
 button:hover {
-  background-color: #2e2e2e; /* Change background color to white */
-  color: #ffd53f; /* Change text color to dark */
-  text-decoration: underline; /* Underline the text */
+  background-color: #2e2e2e;
+  color: #ffd53f;
+  text-decoration: underline;
 }
 
+/*The long wall of text that teaches the user what to do*/
 .info-box {
   position: absolute;
   margin-top: 20px;
@@ -179,11 +190,12 @@ button:hover {
   border: 1px solid #fff;
   background: #232323;
   color: #ffcf27;
-  padding: 0px 10px; /* Adjust padding */
+  padding: 0px 10px;
   font-size: 16px;
   width: 700px;
 }
 
+/*All of these style the form the user uses to update the tribute's properties*/
 .theform{
   margin-top: 0px;
 }
@@ -194,7 +206,7 @@ button:hover {
   border-radius: 5px;
   margin-bottom: 20px;
   margin-top: 20px;
-  width: 500px; /* Adjust the width as needed */
+  width: 500px;
 }
 
 .form-container h1 {
@@ -255,6 +267,6 @@ button:hover {
   color: #ffcf27;
   display: inline-block;
   padding: 5px;
-  margin-top: 10px; /* Reduce space between text and top edge of the box */
+  margin-top: 10px;
   margin-bottom: 10px;
 }

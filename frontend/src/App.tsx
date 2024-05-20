@@ -4,32 +4,39 @@ import cherrowlogo from './assets/cherrowlogo.jpg';
 import Reaping from './reaping';
 import Bloodbath from './bloodbath';
 import ChangeCast from './ChangeCast';
-import cookiesData from './tributes'; // Import the cookies array
+import cookiesData from './tributes';
 
 function App(): React.ReactElement {
-  const [phase, setPhase] = useState<'reaping' | 'bloodbath'>('reaping');
+  const [phase, setPhase] = useState<'reaping' | 'bloodbath'>('reaping'); //Manage the state of the place the user is currently at
   const [cookies, setCookies] = useState(cookiesData); // Manage the state of the cookies array
 
+  //clicking the reset button reloads the website, deleting all saved information and progress
   function resetAll(): void {
     window.location.reload();
   }
 
+  //clicking the "begin simulation" button takes the user to the next place: the bloodbath
   function beginSimulation(): void {
     setPhase('bloodbath');
   }
 
   return (
     <>
+      {/*this is the persistent website logo*/}
       <img src={cherrowlogo} alt="cherrow logo" className="logo" />
+      {/*this is the "Cookie Run Hunger Games" heading*/}
       <div className="headerlabel">
         <p>Cookie Run Hunger Games</p>
       </div>
+      {/*this renders a grid of all 24 tributes*/}
       {phase === 'reaping' ? <Reaping cookies={cookies} /> : <Bloodbath cookies={cookies} />}
+      {/*this button reloads the website*/}
       <button onClick={resetAll} className="reset-button">Reset All</button>
+      {/*this button takes the user to the bloodbath phase*/}
       {phase === 'reaping' && <button onClick={beginSimulation} className="proceed-button">Proceed</button>}
       {phase === 'reaping' && (
         <div className="info-box">
-          <p>
+          <p> {/*this long wall of text is the description of the website, it teaches them how to use it, it also displays extra information*/}
             Alright, if you wanna use this hunger games simulator, keep this in mind:<br />
             <br />
             - I am bad at making this kind of stuff<br />
@@ -122,6 +129,37 @@ function App(): React.ReactElement {
             <br />
             Events that do nothing (10% chance)<br />
             <br />
+            <br />
+            <br />
+            Possible Events (Bloodbath/Feast):<br />
+            <br />
+            Every single tribute will have one of these outcomes, if they don't die before it happens<br />
+            <br />
+            Run Away (50% chance): The tribute escapes the event safely<br />
+            <br />
+            Find Supplies (16.6% chance)<br />
+            <br />
+            Find Weapon (16.6% chance)<br />
+            <br />
+            Duel (16.6% chance)<br />
+            <br />
+            <br />
+            <br />
+            A Final Showdown occurs when there are only two tributes left<br />
+            <br />
+            During the final showdown, damage is halved, to make things more dramatic<br />
+            <br />
+            Possible Events (Final Showdown)<br />
+            <br />
+            <br />
+            Duel (70% chance)<br />
+            <br />
+            Find Weapon (15% chance)<br />
+            <br />
+            Taunt (15% chance)<br />
+            <br />
+            <br />
+            <br />
             At the moment, all these probabilities aren't changeable<br />
             <br />
             <br />
@@ -138,6 +176,7 @@ function App(): React.ReactElement {
           </p>
         </div>
       )}
+      {/*this renders the forms that allows the users to change the tribute's properties*/}
       {phase === 'reaping' && <ChangeCast cookies={cookies} setCookies={setCookies} />} {/* Conditionally render ChangeCast */}
     </>
   );

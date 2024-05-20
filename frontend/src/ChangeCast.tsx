@@ -1,8 +1,9 @@
-// ChangeCast.tsx
 import React, { useState, ChangeEvent, FormEvent } from 'react';
-import { CookieType } from './tributes'; // Adjust the path as per your project structure
+import { CookieType } from './tributes';
 
 function ChangeCast({ cookies, setCookies }: { readonly cookies: CookieType[], readonly setCookies: React.Dispatch<React.SetStateAction<CookieType[]>> }) {
+    //state that manages the forms
+    //it works because the user can only update 1 cookie at a time
     const [cookieForms, setCookieForms] = useState(
         cookies.map((cookie, index) => ({
             newName: cookie.name,
@@ -12,12 +13,13 @@ function ChangeCast({ cookies, setCookies }: { readonly cookies: CookieType[], r
         }))
     );
 
+    //function that handles the change in a cookie's property
     const handleUpdateCookie = (index: number) => {
         return () => {
             const updatedCookies = [...cookies];
             const newHealth = cookieForms[index].newHealth;
             const newDamage = cookieForms[index].newDamage;
-    
+
             // Check if the new health and damage are not negative or zero
             if (newHealth > 0 && newDamage > 0) {
                 updatedCookies[index] = {
@@ -30,12 +32,13 @@ function ChangeCast({ cookies, setCookies }: { readonly cookies: CookieType[], r
                 setCookies(updatedCookies);
             } else {
                 // If health or damage is negative or zero, do not update the corresponding property
-                // You can optionally display a message to the user indicating that the values must be positive
+                // Call out the user for doing this
                 alert("New Values Rejected - Don't Try To Break The Game, Blud");
             }
         };
-    };    
+    };
 
+    //function that handles the user's request to change a cookie's property
     const handleInputChange = (index: number, field: string) => {
         return (e: ChangeEvent<HTMLInputElement>) => {
             const value = e.target.value;
@@ -52,6 +55,7 @@ function ChangeCast({ cookies, setCookies }: { readonly cookies: CookieType[], r
 
     return (
         <div className="theform">
+            {/*this mapping generates all 24 forms*/}
             {cookies.map((cookie, index) => (
                 <div key={index} className="form-container">
                     <h1>Tribute #{index + 1}</h1>
