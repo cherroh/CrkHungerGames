@@ -43,7 +43,7 @@ function App(): React.ReactElement {
             <br />
             - There is a chance that the simulator crashes when it runs,<br />
             if that happens, just leave and come back to the simulator.<br />
-            This happens if you give cookies too much health.<br />
+            This happens if you give cookies too much health<br />
             <br />
             - This simulator is mostly for my personal use, but you all can use it if you want<br />
             <br />
@@ -107,7 +107,7 @@ function App(): React.ReactElement {
             <br />
             Steal (10% chance): A tribute steals from another tribute's belongings, lowering their damage<br />
             <br />
-            Events that do nothing (10% chance): A tribute does something that has no impact on the simulation<br />
+            Events that do nothing (10% chance): A tribute does something that has no impact on the simulation.<br />
             Hey it makes things more realistic alright?<br />
             <br />
             <br />
@@ -134,7 +134,8 @@ function App(): React.ReactElement {
             <br />
             Possible Events (Bloodbath/Feast):<br />
             <br />
-            Every single tribute will have one of these outcomes, if they don't die before it happens<br />
+            Every single tribute will have one of these outcomes, if they don't die before it happens.<br />
+            Feasts occur about every 3 days<br />
             <br />
             Run Away (50% chance): The tribute escapes the event safely<br />
             <br />
