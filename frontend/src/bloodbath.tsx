@@ -666,29 +666,41 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
             "uses pepper spray on {target} and laughs at them",
             "insults {target}"
         ];
-
+    
         const randomEventIndex = Math.floor(Math.random() * events.length); // Randomly select an event index
         const randomEvent = events[randomEventIndex]; // Get the selected event
-
+    
         let randomIndexCookie2 = Math.floor(Math.random() * cookieArray.length); // Get a random index for the cookie to be taunted
         let randomCookie2 = cookieArray[randomIndexCookie2]; // Get the taunted cookie
-
+    
         let randomIndexCookie1; // Initialize variable for the taunter's index
         let randomCookie1; // Initialize variable for the taunter cookie
-
+    
         do { // Loop until a different cookie is selected as the taunter
             randomIndexCookie1 = Math.floor(Math.random() * cookieArray.length); // Get a random index for the taunter cookie
             randomCookie1 = cookieArray[randomIndexCookie1]; // Get the taunter cookie
         } while (randomCookie2 === randomCookie1); // Repeat loop if the same cookie is selected as both taunter and taunted
-
-        const eventMessage = randomEvent.replace("{target}", randomCookie2.name);
-
+    
+        // Split the event message into three parts: before, target, and after
+        const beforeTargetIndex = randomEvent.indexOf("{target}"); // Find the index of {target}
+        const beforeTarget = randomEvent.substring(0, beforeTargetIndex); // Extract before {target}
+        const afterTarget = randomEvent.substring(beforeTargetIndex + "{target}".length); // Extract after {target}
+    
+        // Combine the parts with the target wrapped in <strong> tags
+        const eventMessage = (
+            <>
+                {beforeTarget}
+                <strong>{randomCookie2.name}</strong>
+                {afterTarget}
+            </>
+        );
+    
         let result: React.ReactNode = (
             <>
                 <strong>{randomCookie1.name}</strong> {eventMessage}
             </>
         );
-
+    
         setOutput(prevResults => [ // Update simulation output with taunt result
             ...prevResults,
             {
@@ -697,9 +709,9 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
                 result: result
             }
         ]);
-
+    
         setCookieArray([...cookieArray]); // Update the state with the modified array to trigger a re-render
-    }
+    }    
 
     function selfDeath() {
         // Array of possible harmful events with a fixed damage of 50
