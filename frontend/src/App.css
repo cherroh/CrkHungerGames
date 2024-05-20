@@ -246,6 +246,7 @@ button:hover {
 }
 
 .formbutton {
+  border-radius: 4px;
   text-align: center;
   border: 1px solid #fff;
   background: #232323;

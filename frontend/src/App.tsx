@@ -45,66 +45,68 @@ function App(): React.ReactElement {
             <br />
             Ok, here's how to actually use it: <br />
             <br />
-            No customization: click proceed and run, and that's all<br />
+            No customization: click proceed, that's all<br />
             <br />
-            With customization: use the input boxes to change cookie's values<br />
+            With customization: use the input boxes to change tribute's values<br />
             <br />
-            For the cookie's picture, you must put an imgur.com link into it<br />
+            For the tribute's picture, you must put an imgur.com link into it<br />
             <br />
             You want to use the image's Direct Link<br />
             <br />
             For example: robust axe's image link is https://i.imgur.com/0EQfqJn.png<br />
             <br />
+            You can either upload your own image to imgur.com or use someone else's<br />
+            <br />
             The values you change will NOT save after you run the simulation, or when<br />
             you reload the website<br />
             <br />
-            Do not try to set the cookie's health or damage to 0 or below 0 or i will call u out<br />
+            Do not try to set the tribute's health or damage to 0 or below 0 or i will call u out<br />
             <br />
             <br />
             <br />
             How the simulator works:<br />
             <br />
-            This simulator simulates the Hunger Games, where cookies kill eachother<br />
+            This simulator simulates the Hunger Games, where tributes kill eachother<br />
             <br />
-            The last cookie alive wins<br />
+            The last tribute standing wins<br />
             <br />
-            The cookie's health stat determines how many hits the cookie can take<br />
+            The tribute's health stat determines how many hits the tribute can take<br />
             <br />
-            It also determines how many accidents the cookie can get into before dying<br />
+            It also determines how many accidents the tribute can get into before dying<br />
             <br />
-            The cookie's attack stat determines how much damage they do to other cookies<br />
+            The tribute's attack stat determines how much damage they do to other tributes<br />
             <br />
-            Cookies participate in events (like fights) very often, and most of these events<br />
+            Tributes participate in events (like fights) very often, and most of these events<br />
             DO have an impact on the simulation<br />
             <br />
-            The cookies that participate in events are chosen randomly<br />
+            The tributes that participate in events are chosen randomly<br />
             <br />
             <br />
             <br />
             Possible Events (Daytime):<br />
             <br />
-            Duel (30% chance): Two cookies fight, one cookie hurts the other, they might or<br />
+            Duel (30% chance): Two tributes fight, one tribute hurts the other, they might or<br />
             might not kill them<br />
             <br />
-            Find Weapon (10% chance): A cookie finds a weapon, it increases their damage<br />
+            Find Weapon (10% chance): A tribute finds a weapon, it increases their damage<br />
             <br />
-            Find Supplies (10% chance): A cookie finds supplies, it increases their health<br />
+            Find Supplies (10% chance): A tribute finds supplies, it increases their health<br />
             <br />
-            Taunt (10% chance): One cookie taunts another cookie, this does absolutely nothing<br />
+            Taunt (10% chance): One tribute taunts another tribute, this does absolutely nothing<br />
             but its good for my videos<br />
             <br />
-            Accident (20% chance): A cookie gets in an accident and hurts themself, they might die<br />
+            Accident (20% chance): A tribute gets in an accident and hurts themself, they might die<br />
             <br />
-            Steal (10% chance): A cookie steals from another cookie's belongings, lowering their damage<br />
+            Steal (10% chance): A tribute steals from another tribute's belongings, lowering their damage<br />
             <br />
-            Events that do nothing (10% chance): A cookie does something that has no impact on the simulation<br />
+            Events that do nothing (10% chance): A tribute does something that has no impact on the simulation<br />
             Hey it makes things more realistic alright?<br />
             <br />
             <br />
             <br />
             Possible Events (Nighttime):<br />
             <br />
-            Sleep (10% chance): These are mostly nightmares, a good way to indirectly slander devsis<br />
+            Sleep (10% chance): These are mostly nightmares, which makes things more realistic<br />
             <br />
             Duel (25% chance)<br />
             <br />
@@ -120,7 +122,7 @@ function App(): React.ReactElement {
             <br />
             Events that do nothing (10% chance)<br />
             <br />
-            At the moment, all these probabilities aren't changable<br />
+            At the moment, all these probabilities aren't changeable<br />
             <br />
             <br />
             <br />
