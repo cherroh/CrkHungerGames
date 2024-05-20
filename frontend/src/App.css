@@ -170,7 +170,7 @@ button:hover {
 .info-box {
   position: absolute;
   margin-top: 20px;
-  margin-left: 300px;
+  margin-left: 560px;
   text-align: center;
   border: 1px solid #fff;
   background: #232323;
@@ -178,4 +178,61 @@ button:hover {
   display: inline-block;
   padding: 0px 10px; /* Adjust padding */
   font-size: 16px;
+}
+
+.form-container {
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  margin-top: 30px;
+  width: 500px; /* Adjust the width as needed */
+}
+
+.form-container h1 {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.form-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.form-table th,
+.form-table td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.form-table th {
+  text-align: left;
+}
+
+.form-table td input[type="text"],
+.form-table td input[type="number"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.form-table td input[type="text"]:focus,
+.form-table td input[type="number"]:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.form-table td button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.form-table td button:hover {
+  background-color: #0056b3;
 }

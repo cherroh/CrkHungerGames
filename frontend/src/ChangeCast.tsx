@@ -53,13 +53,13 @@ function ChangeCast({ cookies, setCookies }: { readonly cookies: CookieType[], r
     return (
         <div>
             {cookies.map((cookie, index) => (
-                <div key={index}>
+                <div key={index} className="form-container">
                     <h1>Tribute #{index + 1}</h1>
                     <form onSubmit={(e: FormEvent<HTMLFormElement>) => {
                         e.preventDefault();
                         handleUpdateCookie(index)();
                     }}>
-                        <table>
+                        <table className="form-table">
                             <thead>
                                 <tr>
                                     <th>Stat</th>
