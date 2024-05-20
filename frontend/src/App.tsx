@@ -27,7 +27,7 @@ function App(): React.ReactElement {
       {phase === 'reaping' ? <Reaping cookies={cookies} /> : <Bloodbath cookies={cookies} />}
       <button onClick={resetAll} className="reset-button">Reset All</button>
       {phase === 'reaping' && <button onClick={beginSimulation} className="proceed-button">Proceed</button>}
-      <ChangeCast cookies={cookies} setCookies={setCookies} />
+      {phase === 'reaping' && <ChangeCast cookies={cookies} setCookies={setCookies} />} {/* Conditionally render ChangeCast */}
     </>
   );
 }
