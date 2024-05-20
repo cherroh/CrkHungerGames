@@ -3,7 +3,6 @@
 
 import React, { useState } from 'react'; // Import React and useState hook
 import './App.css'; // Import CSS styles
-import cookie from './tributes.tsx'; // Import cookie data
 import { CookieType } from './tributes'; // Import the CookieType interface or type
 
 interface ReapingProps {

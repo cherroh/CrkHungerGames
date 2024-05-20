@@ -7,7 +7,7 @@ function ChangeCast({ cookies, setCookies }: { readonly cookies: CookieType[], r
     //state that manages the forms
     //it works because the user can only update 1 cookie at a time
     const [cookieForms, setCookieForms] = useState(
-        cookies.map((cookie, index) => ({
+        cookies.map((cookie) => ({
             newName: cookie.name,
             newHealth: cookie.health,
             newDamage: cookie.damage,
@@ -58,7 +58,7 @@ function ChangeCast({ cookies, setCookies }: { readonly cookies: CookieType[], r
     return (
         <div className="theform">
             {/*this mapping generates all 24 forms*/}
-            {cookies.map((cookie, index) => (
+            {cookies.map((_cookie, index) => (
                 <div key={index} className="form-container">
                     <h1>Tribute #{index + 1}</h1>
                     <form onSubmit={(e: FormEvent<HTMLFormElement>) => {
