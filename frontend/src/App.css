@@ -166,3 +166,16 @@ button:hover {
   color: #ffd53f; /* Change text color to dark */
   text-decoration: underline; /* Underline the text */
 }
+
+.info-box {
+  position: absolute;
+  margin-top: 20px;
+  margin-left: 300px;
+  text-align: center;
+  border: 1px solid #fff;
+  background: #232323;
+  color: #ffcf27;
+  display: inline-block;
+  padding: 0px 10px; /* Adjust padding */
+  font-size: 16px;
+}
