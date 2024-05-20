@@ -1,3 +1,5 @@
+//reaping.tsx displays the tributes in a grid
+
 import React from 'react';
 import './App.css';
 import { CookieType } from './tributes';

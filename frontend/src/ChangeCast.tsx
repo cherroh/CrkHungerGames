@@ -1,3 +1,5 @@
+//ChangeCast.tsx generates the forms the user uses to change the default cookie array
+
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { CookieType } from './tributes';
 

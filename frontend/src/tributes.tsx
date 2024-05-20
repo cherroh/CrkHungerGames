@@ -1,3 +1,5 @@
+//tributes.tsx holds the cookie array, with default values set by cherrow
+
 // Define the types for all cookies
 export type CookieType = {
     name: string;

@@ -1,3 +1,5 @@
+//App.tsx is the homepage
+
 import React, { useState } from 'react';
 import './App.css';
 import cherrowlogo from './assets/cherrowlogo.jpg';

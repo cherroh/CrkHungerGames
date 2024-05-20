@@ -1,3 +1,6 @@
+//I gave up on documentation for this, have fun looking at chatGPT's leftover documentation
+//The code is way too long and sloppy so e
+
 import React, { useState } from 'react'; // Import React and useState hook
 import './App.css'; // Import CSS styles
 import cookie from './tributes.tsx'; // Import cookie data
