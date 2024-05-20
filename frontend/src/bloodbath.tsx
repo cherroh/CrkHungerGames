@@ -86,7 +86,6 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
     };
 
     function feast(actions: number) {
-
         const weapons = [
             { weaponName: "stick", weaponDamage: 10 },
             { weaponName: "shovel", weaponDamage: 20 },
@@ -168,10 +167,47 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
 
         const feastCookies = cookieArray.filter(_ => Math.random() < 0.5);
 
-        // Separate cookies that stayed at the feast and those who didn't
+        if (actions > 0) {
+            if (feastCookies.length === 0) {
+                let result2: React.ReactNode = (
+                    <div className="feastlabel">
+                        The feast ends (No cookies remaining)
+                    </div>
+                );
+
+                setOutput(prevResults => [
+                    ...prevResults,
+                    {
+                        Cookie1: "empty",
+                        Cookie2: "empty",
+                        result: result2
+                    }
+                ]);
+                return;
+            }
+        } else {
+            if (feastCookies.length === 0) {
+                let result2: React.ReactNode = (
+                    <div className="feastlabel">
+                        The bloodbath ends (No cookies remaining)
+                    </div>
+                );
+
+                setOutput(prevResults => [
+                    ...prevResults,
+                    {
+                        Cookie1: "empty",
+                        Cookie2: "empty",
+                        result: result2
+                    }
+                ]);
+                return;
+            }
+        }
+
+
         const leftFeastCookies = cookieArray.filter(cookie => !feastCookies.includes(cookie));
 
-        // Output for cookies that left the feast
         leftFeastCookies.forEach(currentCookie => {
             let result2: React.ReactNode = (
                 <>
@@ -189,12 +225,11 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
             ]);
         });
 
-        // Process the cookies that stayed at the feast
         feastCookies.forEach(currentCookie => {
             if (currentCookie.isAlive) {
-                const outcome = Math.random(); // Determine if the current cookie gains health (true) or takes damage (false)
+                const outcome = Math.random();
                 if (outcome < 0.33) {
-                    currentCookie.health += 50; // Gain health
+                    currentCookie.health += 50;
                     setOutput(prevResults => [
                         ...prevResults,
                         {
@@ -203,21 +238,22 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
                             result: <><strong>{currentCookie.name}</strong> grabs some supplies</>
                         }
                     ]);
-                } else if (outcome < 0.67) {
-                    const randomWeaponIndex = Math.floor(Math.random() * weapons.length); // Randomly select a weapon index
-                    const randomWeapon = weapons[randomWeaponIndex]; // Get the selected weapon
+                }
+                else if (outcome < 0.67) {
+                    const randomWeaponIndex = Math.floor(Math.random() * weapons.length);
+                    const randomWeapon = weapons[randomWeaponIndex];
 
-                    currentCookie.damage += randomWeapon.weaponDamage; // Increase damage of the selected cookie by the weapon's damage
-                    currentCookie.weapon = randomWeapon.weaponName; // Set the cookie's weapon to the selected weapon's name
+                    currentCookie.damage += randomWeapon.weaponDamage;
+                    currentCookie.weapon = randomWeapon.weaponName;
 
                     const weaponMessage = weaponMessages[randomWeapon.weaponName];
                     let result: React.ReactNode = (
                         <>
                             <strong>{currentCookie.name}</strong> {weaponMessage}
                         </>
-                    ); // Generate grab weapon result message with chosen weapon
+                    );
 
-                    setOutput(prevResults => [ // Update simulation output with grab weapon result
+                    setOutput(prevResults => [
                         ...prevResults,
                         {
                             Cookie1: currentCookie.picture,
@@ -226,28 +262,27 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
                         }
                     ]);
                 } else {
-                    // Get the damaging cookie excluding the current cookie
                     let damagingCookie: CookieType | undefined;
                     do {
                         damagingCookie = feastCookies.filter(cookie => cookie !== currentCookie)[Math.floor(Math.random() * (feastCookies.length - 1))];
                     } while (damagingCookie && !damagingCookie.isAlive);
 
-                    currentCookie.health -= damagingCookie.damage; // Take damage
+                    currentCookie.health -= damagingCookie.damage;
 
                     let eventMessage = "";
                     if (!damagingCookie.weapon || damagingCookie.weapon === "none") {
                         const randomEventIndex = Math.floor(Math.random() * noWeaponEvents.length);
                         eventMessage = noWeaponEvents[randomEventIndex].replace("{target}", currentCookie.name);
                     } else {
-                        let weaponClass: keyof typeof weaponClasses = "melee"; // Explicit type declaration
+                        let weaponClass: keyof typeof weaponClasses = "melee";
                         for (let key in weaponClasses) {
-                            if (weaponClasses[key as keyof typeof weaponClasses].includes(damagingCookie.weapon)) { // Type assertion
+                            if (weaponClasses[key as keyof typeof weaponClasses].includes(damagingCookie.weapon)) {
                                 weaponClass = key as keyof typeof weaponClasses;
                                 break;
                             }
                         }
 
-                        let eventArray: string[] = []; // Initialize eventArray
+                        let eventArray: string[] = [];
                         if (weaponClass === "melee") {
                             eventArray = meleeEvents;
                         } else if (weaponClass === "ranged") {
@@ -281,15 +316,15 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
                         </>
                     );
 
-                    if (currentCookie.health <= 0) { // Check if the killed cookie is dead
-                        currentCookie.isAlive = false; // Mark killed cookie as not alive
-                        const index = cookieArray.findIndex(cookie => cookie.name === currentCookie.name); // Find the index of the currentCookie in cookieArray
-                        if (index !== -1) { // Ensure the cookie exists in cookieArray
-                            cookieArray.splice(index, 1); // Remove the killed cookie from the array
+                    if (currentCookie.health <= 0) {
+                        currentCookie.isAlive = false;
+                        const index = cookieArray.findIndex(cookie => cookie.name === currentCookie.name);
+                        if (index !== -1) {
+                            cookieArray.splice(index, 1);
                         }
                     }
 
-                    setOutput(prevResults => [ // Update simulation output with duel result
+                    setOutput(prevResults => [
                         ...prevResults,
                         {
                             Cookie1: damagingCookie.picture,
@@ -298,8 +333,7 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
                         }
                     ]);
 
-                    setCookieArray([...feastCookies]); // Update the state with the modified array to trigger a re-render
-
+                    setCookieArray([...feastCookies]);
                 }
             }
             setCookieArray([...feastCookies]);
@@ -336,8 +370,8 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
                 }
             ]);
         }
-
     }
+
 
     function duel() { // Function to simulate a duel
         const noWeaponEvents = [
