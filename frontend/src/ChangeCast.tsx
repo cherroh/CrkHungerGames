@@ -113,7 +113,7 @@ function ChangeCast({ cookies, setCookies }: { readonly cookies: CookieType[], r
                                 </tr>
                             </tbody>
                         </table>
-                        <button type="submit">Update</button>
+                        <button type="submit" className="formbutton">Update</button>
                     </form>
                 </div>
             ))}
