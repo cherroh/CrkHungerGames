@@ -15,16 +15,26 @@ function ChangeCast({ cookies, setCookies }: { readonly cookies: CookieType[], r
     const handleUpdateCookie = (index: number) => {
         return () => {
             const updatedCookies = [...cookies];
-            updatedCookies[index] = {
-                ...updatedCookies[index],
-                name: cookieForms[index].newName,
-                health: cookieForms[index].newHealth,
-                damage: cookieForms[index].newDamage,
-                picture: cookieForms[index].newPicture
-            };
-            setCookies(updatedCookies);
+            const newHealth = cookieForms[index].newHealth;
+            const newDamage = cookieForms[index].newDamage;
+    
+            // Check if the new health and damage are not negative or zero
+            if (newHealth > 0 && newDamage > 0) {
+                updatedCookies[index] = {
+                    ...updatedCookies[index],
+                    name: cookieForms[index].newName,
+                    health: newHealth,
+                    damage: newDamage,
+                    picture: cookieForms[index].newPicture
+                };
+                setCookies(updatedCookies);
+            } else {
+                // If health or damage is negative or zero, do not update the corresponding property
+                // You can optionally display a message to the user indicating that the values must be positive
+                alert("New Values Rejected - Don't Try To Break The Game, Blud");
+            }
         };
-    };
+    };    
 
     const handleInputChange = (index: number, field: string) => {
         return (e: ChangeEvent<HTMLInputElement>) => {
