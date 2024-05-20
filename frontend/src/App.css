@@ -18,7 +18,7 @@ img.logo {
   text-align: center;
   border: 1px solid #fff;
   background: #232323;
-  margin-left: 207px;
+  margin-left: 206.715px;
   margin-right: auto;
   color: #ffcf27;
   display: inline-block;
@@ -114,6 +114,19 @@ img.logo {
   color: #ffcf27;
   display: inline-block;
   padding: 5px;
+  margin-top: 20px; /* Reduce space between text and top edge of the box */
+  margin-bottom: 0px; /* Reduce space between text and bottom edge of the box */
+}
+
+.bloodbathlabelmain {
+  text-align: center;
+  border: 1px solid #fff;
+  background: #232323;
+  margin-left: 0px;
+  margin-right: auto;
+  color: #ffcf27;
+  display: inline-block;
+  padding: 5px;
   margin-top: 60px; /* Reduce space between text and top edge of the box */
   margin-bottom: 22px; /* Reduce space between text and bottom edge of the box */
 }
@@ -145,7 +158,7 @@ strong {
   display: inline-block;
   padding: 5px;
   margin-top: 10px; /* Reduce space between text and top edge of the box */
-  margin-bottom: 20px; /* Reduce space between text and bottom edge of the box */
+  margin-bottom: 10px; /* Reduce space between text and bottom edge of the box */
 }
 
 button:hover {

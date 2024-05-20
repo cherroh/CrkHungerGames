@@ -9,23 +9,52 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
 
     function beginSimulation() {
         setSimulationReady(false); // Set simulation readiness state to false
-        let days = 0; // Initialize the days counter outside the loop
+        let actions = 0;
+        let daysCounter = 1; // Initialize the days counter outside the loop
+        let time = "Day";
 
         while (cookieArray.length > 1) { // Loop until only one cookie remains in the array
-            if (days % 100 === 0 && cookieArray.length > 4) { // Check if it's the 7th day
-                feast(days); // Call feast function on every 7th day
+            if (actions % 100 === 0 && cookieArray.length > 4) { // Check if it's the 7th day
+                feast(actions); // Call feast function on every 7th day
+            }
+            if (actions % 20 === 0) { // Check if it's the 7th day
+                displayDay(daysCounter, time); // Call displayDay function with days and time
+                if (time === "Night") { // Check if it's night to increment daysCounter
+                    daysCounter++;
+                }
+                time = time === "Day" ? "Night" : "Day"; // Toggle time between day and night
             }
             if (cookieArray.length > 1) {
                 selectEvent(); // Perform a simulation step
-                days++; // Increment the days counter
+                actions++; // Increment the days counter
             }
         }
+    }
 
+
+    function displayDay(daysCounter: number, time: string) {
+        // Define the output state and setter function using useState hook
+
+        let result: React.ReactNode = (
+            <div className="feastlabel">
+                {time} {daysCounter}
+            </div>
+        );
+
+        // Update the output state with the new result
+        setOutput(prevResults => [
+            ...prevResults,
+            {
+                Cookie1: "empty",
+                Cookie2: "empty",
+                result: result
+            }
+        ]);
     }
 
     function selectEvent() {
         const randomProbability = Math.random(); // Generate a random number between 0 and 1
-    
+
         if (randomProbability < 0.3) {
             duel(); // 30% chance
         } else if (randomProbability < 0.4) {
@@ -38,13 +67,13 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
             selfDeath(); // 20% chance
         } else if (randomProbability < 0.9) {
             steal(); // 10% chance
-        } else if (randomProbability < 1){
+        } else if (randomProbability < 1) {
             goofOff(); // 10% chance
         } else {
             alert("the website broke");
             window.location.reload();
         }
-    }    
+    }
 
     type CookieType = {
         name: string;
@@ -56,7 +85,7 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
         // Add any other properties if necessary
     };
 
-    function feast(days: number) {
+    function feast(actions: number) {
 
         const weapons = [
             { weaponName: "stick", weaponDamage: 10 },
@@ -120,10 +149,10 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
             "explosives": ["landmines", "bombs"]
         };
 
-        if (days > 0) {
+        if (actions > 0) {
             let result: React.ReactNode = (
                 <div className="feastlabel">
-                    A Feast Begins
+                    A feast begins at the center of the map
                 </div>
             );
 
@@ -276,10 +305,10 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
             setCookieArray([...feastCookies]);
         });
 
-        if (days > 0) {
+        if (actions > 0) {
             let result2: React.ReactNode = (
                 <div className="feastlabel">
-                    The Feast Ended
+                    The feast ends
                 </div>
             );
 
@@ -293,7 +322,7 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
             ]);
         } else {
             let result2: React.ReactNode = (
-                <div className="feastlabel">
+                <div className="bloodbathlabel">
                     The Bloodbath Ends
                 </div>
             );
@@ -629,7 +658,7 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
                     </>
                 )}
             </>
-        );        
+        );
 
         if (randomCookie1.health <= 0) { // Check if the hurt cookie is dead
             randomCookie1.isAlive = false; // Mark hurt cookie as not alive
@@ -738,7 +767,7 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
     return (
         <div className="bloodbath">
             {!simulationReady && (
-                <div className="bloodbathlabel">
+                <div className="bloodbathlabelmain">
                     <p>The Bloodbath Begins</p>
                 </div>
             )}
