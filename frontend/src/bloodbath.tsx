@@ -1,9 +1,14 @@
 import React, { useState } from 'react'; // Import React and useState hook
 import './App.css'; // Import CSS styles
 import cookie from './tributes.tsx'; // Import cookie data
+import { CookieType } from './tributes'; // Import the CookieType interface or type
 
-function Bloodbath(): React.ReactElement { // Define Bloodbath component
-    const [cookieArray, setCookieArray] = useState(cookie); // Initialize state for cookie array
+interface ReapingProps {
+    cookies: CookieType[]; // Define the prop type
+  }
+
+function Bloodbath({ cookies }: ReapingProps): React.ReactElement { // Define Bloodbath component
+    const [cookieArray, setCookieArray] = useState(cookies); // Initialize state for cookie array
     const [simulationReady, setSimulationReady] = useState(true); // Initialize state for simulation readiness
     const [output, setOutput] = useState<{ Cookie1: string; Cookie2: string; result: React.ReactNode; }[]>([]); // Initialize state for simulation output
 

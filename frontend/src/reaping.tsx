@@ -1,8 +1,12 @@
 import React from 'react';
 import './App.css';
-import cookie from './tributes.tsx'; // Import the Cookie array
+import { CookieType } from './tributes'; // Import the CookieType interface or type
 
-function Reaping(): React.ReactElement {
+interface ReapingProps {
+  cookies: CookieType[]; // Define the prop type
+}
+
+function Reaping({ cookies }: ReapingProps): React.ReactElement {
   return (
     <div className="reaping">
       <table>
@@ -17,7 +21,7 @@ function Reaping(): React.ReactElement {
               </tr>
               {/* Existing row */}
               <tr key={rowIndex + 1000}>
-                {cookie.slice(start, start + 6).map((cookieObj, cellIndex) => (
+                {cookies.slice(start, start + 6).map((cookieObj, cellIndex) => (
                   <td key={cellIndex}>
                     <img src={cookieObj.picture} alt={cookieObj.name} className="tribute-image" />
                     <p className="tribute-name">{cookieObj.name}</p>
@@ -31,6 +35,5 @@ function Reaping(): React.ReactElement {
     </div>
   );
 }
-
 
 export default Reaping;

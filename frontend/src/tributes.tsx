@@ -1,5 +1,5 @@
 // Define the type for a cookie person
-type CookieType = {
+export type CookieType = {
     name: string;
     isAlive: boolean;
     health: number;
