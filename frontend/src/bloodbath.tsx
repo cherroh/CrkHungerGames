@@ -13,11 +13,11 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
         let daysCounter = 1; // Initialize the days counter outside the loop
         let time = "Day";
 
-        while (cookieArray.length > 1) { // Loop until only one cookie remains in the array
+        while (cookieArray.length > 2) { // Loop until only one cookie remains in the array
             if (actions % 100 === 0 && cookieArray.length > 4) { // Check if it's the 7th day
                 feast(actions); // Call feast function on every 7th day
             }
-            if (actions % 20 === 0) { // Check if it's the 7th day
+            if (actions % 20 === 0 && cookieArray.length > 2) { // Check if it's the 7th day
                 if (actions > 0) {
                     if (time === "Night") { // Check if it's night to increment daysCou
                         daysCounter++;
@@ -30,22 +30,41 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
                 }
                 displayDay(daysCounter, time); // Call displayDay function with days and time
             }
-            if (cookieArray.length > 1) {
+            if (cookieArray.length > 1 && cookieArray.length > 2) {
                 selectEvent(time); // Perform a simulation step
                 actions++; // Increment the days counter
             }
         }
+
+        time = "Finale";
+        displayDay(daysCounter, time);
+        while (cookieArray.length > 1) {
+            selectEvent(time);
+        }
+
     }
 
 
     function displayDay(daysCounter: number, time: string) {
         // Define the output state and setter function using useState hook
 
-        let result: React.ReactNode = (
-            <div className="feastlabel">
-                {time} {daysCounter}
-            </div>
-        );
+        let result:React.ReactNode;
+        if (time === "Day" || time === "Night") {
+            result = (
+                <div className="feastlabel">
+                    {time} {daysCounter}
+                </div>
+            );
+        } else if (time === "Finale") {
+            result = (
+                <div className="feastlabel">
+                    The Final Showdown Begins!
+                </div>
+            );
+        } else {
+            alert("the website broke");
+            window.location.reload();
+        }
 
         // Update the output state with the new result
         setOutput(prevResults => [
@@ -95,6 +114,18 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
                 steal(); // 20% chance
             } else if (randomProbability < 1) {
                 sleep(); // 10% chance
+            } else {
+                alert("the website broke");
+                window.location.reload();
+            }
+        }
+        if (time === "Finale") {
+            if (randomProbability < 0.70) {
+                duelShowdown(); // 70% chance
+            } else if (randomProbability < 0.85) {
+                grabWeapon(); // 15% chance
+            } else if (randomProbability < 1) {
+                taunt(); // 15% chance
             } else {
                 alert("the website broke");
                 window.location.reload();
@@ -879,6 +910,124 @@ function Bloodbath(): React.ReactElement { // Define Bloodbath component
             {
                 Cookie1: randomCookie1.picture,
                 Cookie2: "empty",
+                result: result
+            }
+        ]);
+
+        setCookieArray([...cookieArray]); // Update the state with the modified array to trigger a re-render
+    }
+
+    function duelShowdown() { // Function to simulate a duel
+        const noWeaponEvents = [
+            "holds {target}'s head under a lake",
+            "holds {target}'s head under a river",
+            "strangles {target}",
+            "and {target} engage in a fist fight",
+            "bashes {target}'s head into a rock several times",
+            "twists {target}'s neck",
+            "pushes {target} off a cliff",
+            "sneaks up on {target} and beats them up"
+        ];
+
+        const meleeEvents = [
+            "stabs {target} with a {weapon}",
+            "slashes {target} with a {weapon}",
+            "slaps {target} with a {weapon}",
+            "impales {target} with a {weapon}",
+            "shoves a {weapon} up {target}'s abdomen"
+        ];
+
+        const rangedEvents = [
+            "shoots {target} with a {weapon}",
+            "snipes {target} with a {weapon}",
+            "taunts {target}, then shoots them with a {weapon}"
+        ];
+
+        const explosiveEvents = [
+            "blows up {target} with {weapon}",
+            "detonates {weapon} near {target}",
+            "throws {weapon} at {target} and it explodes",
+            "throws {weapon} at {target}'s face and it explodes",
+            "hides {weapon} in {target}'s pants and it explodes"
+        ];
+
+        const weaponClasses = {
+            "melee": ["stick", "shovel", "axe", "knife", "sword", "spear"],
+            "ranged": ["bow", "gun"],
+            "explosives": ["landmines", "bombs"]
+        };
+
+        let randomIndexCookie2 = Math.floor(Math.random() * cookieArray.length); // Get a random index for the cookie to be killed
+        let randomCookie2 = cookieArray[randomIndexCookie2]; // Get the killed cookie
+
+        let randomIndexCookie1; // Initialize variable for killer index
+        let randomCookie1; // Initialize variable for killer cookie
+
+        do { // Loop until a different cookie is selected as the killer
+            randomIndexCookie1 = Math.floor(Math.random() * cookieArray.length); // Get a random index for the killer cookie
+            randomCookie1 = cookieArray[randomIndexCookie1]; // Get the killer cookie
+        } while (randomCookie2 === randomCookie1); // Repeat loop if same cookie is selected as both killed and killer
+
+        let calculatedDamage: number = randomCookie1.damage / 2;
+        randomCookie2.health -= calculatedDamage; // Reduce health of the killed cookie by killer's damage
+
+        let eventMessage = "";
+        if (!randomCookie1.weapon || randomCookie1.weapon === "none") {
+            const randomEventIndex = Math.floor(Math.random() * noWeaponEvents.length);
+            eventMessage = noWeaponEvents[randomEventIndex].replace("{target}", randomCookie2.name);
+        } else {
+            let weaponClass: keyof typeof weaponClasses = "melee"; // Explicit type declaration
+            for (let key in weaponClasses) {
+                if (weaponClasses[key as keyof typeof weaponClasses].includes(randomCookie1.weapon)) { // Type assertion
+                    weaponClass = key as keyof typeof weaponClasses;
+                    break;
+                }
+            }
+
+            let eventArray: string[] = []; // Initialize eventArray
+            if (weaponClass === "melee") {
+                eventArray = meleeEvents;
+            } else if (weaponClass === "ranged") {
+                eventArray = rangedEvents;
+            } else if (weaponClass === "explosives") {
+                eventArray = explosiveEvents;
+            }
+
+            const randomEventIndex = Math.floor(Math.random() * eventArray.length);
+            eventMessage = eventArray[randomEventIndex]
+                .replace("{target}", randomCookie2.name)
+                .replace("{weapon}", randomCookie1.weapon);
+        }
+
+        let result = (
+            <>
+                <strong>{randomCookie1.name}</strong> {eventMessage}
+                {randomCookie2.health <= 0 ? (
+                    <>
+                        {', '}
+                        <strong>{randomCookie2.name}</strong>
+                        {' dies'}
+                    </>
+                ) : (
+                    <>
+                        {', '}
+                        <strong>{randomCookie2.name}</strong>
+                        {' survives'}
+                    </>
+                )}
+            </>
+        );
+
+        if (randomCookie2.health <= 0) { // Check if the killed cookie is dead
+            randomCookie2.isAlive = false; // Mark killed cookie as not alive
+            cookieArray.splice(randomIndexCookie2, 1); // Remove the killed cookie from the array
+        }
+
+        setOutput(prevResults => [ // Update simulation output with duel result
+            ...prevResults,
+            {
+                Cookie1: randomCookie1.picture,
+                Cookie2: randomCookie2.picture,
                 result: result
             }
         ]);
