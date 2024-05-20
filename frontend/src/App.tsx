@@ -73,7 +73,66 @@ function App(): React.ReactElement {
             It also determines how many accidents the cookie can get into before dying<br />
             <br />
             The cookie's attack stat determines how much damage they do to other cookies<br />
-
+            <br />
+            Cookies participate in events (like fights) very often, and most of these events<br />
+            DO have an impact on the simulation<br />
+            <br />
+            The cookies that participate in events are chosen randomly<br />
+            <br />
+            <br />
+            <br />
+            Possible Events (Daytime):<br />
+            <br />
+            Duel (30% chance): Two cookies fight, one cookie hurts the other, they might or<br />
+            might not kill them<br />
+            <br />
+            Find Weapon (10% chance): A cookie finds a weapon, it increases their damage<br />
+            <br />
+            Find Supplies (10% chance): A cookie finds supplies, it increases their health<br />
+            <br />
+            Taunt (10% chance): One cookie taunts another cookie, this does absolutely nothing<br />
+            but its good for my videos<br />
+            <br />
+            Accident (20% chance): A cookie gets in an accident and hurts themself, they might die<br />
+            <br />
+            Steal (10% chance): A cookie steals from another cookie's belongings, lowering their damage<br />
+            <br />
+            Events that do nothing (10% chance): A cookie does something that has no impact on the simulation<br />
+            Hey it makes things more realistic alright?<br />
+            <br />
+            <br />
+            <br />
+            Possible Events (Nighttime):<br />
+            <br />
+            Sleep (10% chance): These are mostly nightmares, a good way to indirectly slander devsis<br />
+            <br />
+            Duel (25% chance)<br />
+            <br />
+            Find Weapon (5% chance)<br />
+            <br />
+            Find Supplies (5% chance)<br />
+            <br />
+            Taunt (10% chance)<br />
+            <br />
+            Accident (15% chance)<br />
+            <br />
+            Steal (20% chance)<br />
+            <br />
+            Events that do nothing (10% chance)<br />
+            <br />
+            At the moment, all these probabilities aren't changable<br />
+            <br />
+            <br />
+            <br />
+            Some extra information:<br />
+            <br />
+            Original Simulator: <a href="https://brantsteele.net/hungergames/disclaimer.php">https://brantsteele.net/hungergames/disclaimer.php</a><br />
+            <br />
+            Author: cherrow<br />
+            <br />
+            <br />
+            <br />
+            Well that was a long wall of text
           </p>
         </div>
       )}
