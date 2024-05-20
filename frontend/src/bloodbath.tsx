@@ -19,7 +19,7 @@ function Bloodbath({ cookies }: ReapingProps): React.ReactElement { // Define Bl
         let time = "Day";
 
         while (cookieArray.length > 2) { // Loop until only one cookie remains in the array
-            if (actions % 100 === 0 && cookieArray.length > 4) { // Check if it's the 7th day
+            if (actions % 120 === 0 && cookieArray.length > 4) { // Check if it's the 7th day
                 feast(actions); // Call feast function on every 7th day
             }
             if (actions % 20 === 0 && cookieArray.length > 2) { // Check if it's the 7th day
@@ -251,7 +251,7 @@ function Bloodbath({ cookies }: ReapingProps): React.ReactElement { // Define Bl
         if (actions > 0) {
             let result: React.ReactNode = (
                 <div className="feastlabel">
-                    A feast begins at the center of the map
+                    A Feast Begins at the Center of the Map
                 </div>
             );
 
@@ -271,7 +271,7 @@ function Bloodbath({ cookies }: ReapingProps): React.ReactElement { // Define Bl
             if (feastCookies.length < 2) {
                 let result2: React.ReactNode = (
                     <div className="feastlabel">
-                        The feast ends (No cookies attended the feast)
+                        The Feast Ends (No Cookies Attended the Feast)
                     </div>
                 );
 
@@ -289,7 +289,7 @@ function Bloodbath({ cookies }: ReapingProps): React.ReactElement { // Define Bl
             if (feastCookies.length < 2) {
                 let result2: React.ReactNode = (
                     <div className="feastlabel">
-                        The bloodbath ends (All cookies left the area immediately)
+                        The Bloodbath Ends (All Cookies Left the Area Immediately)
                     </div>
                 );
 
@@ -442,7 +442,7 @@ function Bloodbath({ cookies }: ReapingProps): React.ReactElement { // Define Bl
         if (actions > 0) {
             let result2: React.ReactNode = (
                 <div className="feastlabel">
-                    The feast ends
+                    The Feast Ends
                 </div>
             );
 

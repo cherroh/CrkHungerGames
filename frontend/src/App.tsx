@@ -41,8 +41,9 @@ function App(): React.ReactElement {
             <br />
             - I am bad at making this kind of stuff<br />
             <br />
-            - There is a very small chance that the simulator crashes when it runs,<br />
+            - There is a chance that the simulator crashes when it runs,<br />
             if that happens, just leave and come back to the simulator.<br />
+            This happens if you give cookies too much health.<br />
             <br />
             - This simulator is mostly for my personal use, but you all can use it if you want<br />
             <br />
