@@ -313,19 +313,17 @@ function Bloodbath({ cookies }: ReapingProps): React.ReactElement { // Define Bl
 
         const leftFeastCookies = cookieArray.filter(cookie => !feastCookies.includes(cookie));
 
-        let result2: React.ReactNode;
-
         leftFeastCookies.forEach(currentCookie => {
+            let result2: React.ReactNode = (
+                <>
+                    <strong>{currentCookie.name}</strong> runs away and leaves the cornucopia
+                </>
+            );
+
             if (actions > 0) {
                 result2 = (
                     <>
                         <strong>{currentCookie.name}</strong> doesn't attend the feast
-                    </>
-                );
-            } else {
-                result2 = (
-                    <>
-                        <strong>{currentCookie.name}</strong> runs away and leaves the cornucopia
                     </>
                 );
             }
