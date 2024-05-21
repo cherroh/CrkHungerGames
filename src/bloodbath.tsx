@@ -7,7 +7,7 @@ import { CookieType } from './tributes'; // Import the CookieType interface or t
 
 interface ReapingProps {
     cookies: CookieType[]; // Define the prop type
-  }
+}
 
 function Bloodbath({ cookies }: ReapingProps): React.ReactElement { // Define Bloodbath component
     const [cookieArray, setCookieArray] = useState(cookies); // Initialize state for cookie array
@@ -55,7 +55,7 @@ function Bloodbath({ cookies }: ReapingProps): React.ReactElement { // Define Bl
     function displayDay(daysCounter: number, time: string) {
         // Define the output state and setter function using useState hook
 
-        let result:React.ReactNode;
+        let result: React.ReactNode;
         if (time === "Day" || time === "Night") {
             result = (
                 <div className="feastlabel">
@@ -227,7 +227,10 @@ function Bloodbath({ cookies }: ReapingProps): React.ReactElement { // Define Bl
             "slashes {target} with a {weapon}",
             "slaps {target} with a {weapon}",
             "impales {target} with a {weapon}",
-            "shoves a {weapon} up {target}'s abdomen"
+            "shoves a {weapon} up {target}'s abdomen",
+            "sneaks behind {target} and stabs them with a {weapon}",
+            "taunts {target}, then impales them with a {weapon}",
+            "taunts {target}, then stabs them with a {weapon}"
         ];
 
         const rangedEvents = [
@@ -310,12 +313,22 @@ function Bloodbath({ cookies }: ReapingProps): React.ReactElement { // Define Bl
 
         const leftFeastCookies = cookieArray.filter(cookie => !feastCookies.includes(cookie));
 
+        let result2: React.ReactNode;
+
         leftFeastCookies.forEach(currentCookie => {
-            let result2: React.ReactNode = (
-                <>
-                    <strong>{currentCookie.name}</strong> runs away and leaves the cornucopia
-                </>
-            );
+            if (actions > 0) {
+                result2 = (
+                    <>
+                        <strong>{currentCookie.name}</strong> doesn't attend the feast
+                    </>
+                );
+            } else {
+                result2 = (
+                    <>
+                        <strong>{currentCookie.name}</strong> runs away and leaves the cornucopia
+                    </>
+                );
+            }
 
             setOutput(prevResults => [
                 ...prevResults,
@@ -484,7 +497,10 @@ function Bloodbath({ cookies }: ReapingProps): React.ReactElement { // Define Bl
             "bashes {target}'s head into a rock several times",
             "twists {target}'s neck",
             "pushes {target} off a cliff",
-            "sneaks up on {target} and beats them up"
+            "sneaks up on {target} and beats them up",
+            "grabs {target}'s head and yanks on it",
+            "smashes {target}'s head into a tree",
+            "takes a bite out of {target}"
         ];
 
         const meleeEvents = [
@@ -492,7 +508,10 @@ function Bloodbath({ cookies }: ReapingProps): React.ReactElement { // Define Bl
             "slashes {target} with a {weapon}",
             "slaps {target} with a {weapon}",
             "impales {target} with a {weapon}",
-            "shoves a {weapon} up {target}'s abdomen"
+            "shoves a {weapon} up {target}'s abdomen",
+            "sneaks behind {target} and stabs them with a {weapon}",
+            "taunts {target}, then impales them with a {weapon}",
+            "taunts {target}, then stabs them with a {weapon}"
         ];
 
         const rangedEvents = [
@@ -897,7 +916,9 @@ function Bloodbath({ cookies }: ReapingProps): React.ReactElement { // Define Bl
             "starts a fire but it spreads a bit too much",
             "lights the forest on fire for literally no good reason",
             "looks a bit green, due to an infection",
-            "thinks about how bad frost flop is"
+            "thinks about how bad frost flop is",
+            "commits arson in the forest",
+            "catches a fish, unfortunately it's fishgato"
         ];
 
         const randomEventIndex = Math.floor(Math.random() * events.length); // Randomly select an event index
@@ -933,7 +954,10 @@ function Bloodbath({ cookies }: ReapingProps): React.ReactElement { // Define Bl
             "bashes {target}'s head into a rock several times",
             "twists {target}'s neck",
             "pushes {target} off a cliff",
-            "sneaks up on {target} and beats them up"
+            "sneaks up on {target} and beats them up",
+            "grabs {target}'s head and yanks on it",
+            "smashes {target}'s head into a tree",
+            "takes a bite out of {target}"
         ];
 
         const meleeEvents = [
@@ -941,7 +965,10 @@ function Bloodbath({ cookies }: ReapingProps): React.ReactElement { // Define Bl
             "slashes {target} with a {weapon}",
             "slaps {target} with a {weapon}",
             "impales {target} with a {weapon}",
-            "shoves a {weapon} up {target}'s abdomen"
+            "shoves a {weapon} up {target}'s abdomen",
+            "sneaks behind {target} and stabs them with a {weapon}",
+            "taunts {target}, then impales them with a {weapon}",
+            "taunts {target}, then stabs them with a {weapon}"
         ];
 
         const rangedEvents = [
