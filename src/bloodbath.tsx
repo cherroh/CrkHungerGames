@@ -377,21 +377,26 @@ function Bloodbath({ cookies }: ReapingProps): React.ReactElement { // Define Bl
                         }
                     ]);
                 } else {
-                    let damagingCookie: CookieType | undefined;
+                    let damagedCookie: CookieType | undefined;
                     do {
-                        damagingCookie = feastCookies.filter(cookie => cookie !== currentCookie)[Math.floor(Math.random() * (feastCookies.length - 1))];
-                    } while (damagingCookie && !damagingCookie.isAlive);
+                        damagedCookie = feastCookies.filter(cookie => cookie !== currentCookie)[Math.floor(Math.random() * (feastCookies.length - 1))];
+                    } while (damagedCookie && !damagedCookie.isAlive);
 
-                    currentCookie.health -= damagingCookie.damage;
+                    if (!damagedCookie) {
+                        alert("the website broke");
+                        window.location.reload();
+                    }
+
+                    damagedCookie.health -= currentCookie.damage;
 
                     let eventMessage = "";
-                    if (!damagingCookie.weapon || damagingCookie.weapon === "none") {
+                    if (!currentCookie.weapon || currentCookie.weapon === "none") {
                         const randomEventIndex = Math.floor(Math.random() * noWeaponEvents.length);
-                        eventMessage = noWeaponEvents[randomEventIndex].replace("{target}", currentCookie.name);
+                        eventMessage = noWeaponEvents[randomEventIndex].replace("{target}", damagedCookie.name);
                     } else {
                         let weaponClass: keyof typeof weaponClasses = "melee";
                         for (let key in weaponClasses) {
-                            if (weaponClasses[key as keyof typeof weaponClasses].includes(damagingCookie.weapon)) {
+                            if (weaponClasses[key as keyof typeof weaponClasses].includes(currentCookie.weapon)) {
                                 weaponClass = key as keyof typeof weaponClasses;
                                 break;
                             }
@@ -408,32 +413,32 @@ function Bloodbath({ cookies }: ReapingProps): React.ReactElement { // Define Bl
 
                         const randomEventIndex = Math.floor(Math.random() * eventArray.length);
                         eventMessage = eventArray[randomEventIndex]
-                            .replace("{target}", currentCookie.name)
-                            .replace("{weapon}", damagingCookie.weapon);
+                            .replace("{target}", damagedCookie.name)
+                            .replace("{weapon}", currentCookie.weapon);
                     }
 
                     let result = (
                         <>
-                            <strong>{damagingCookie.name}</strong> {eventMessage}
-                            {currentCookie.health <= 0 ? (
+                            <strong>{currentCookie.name}</strong> {eventMessage}
+                            {damagedCookie.health <= 0 ? (
                                 <>
                                     {', '}
-                                    <strong>{currentCookie.name}</strong>
+                                    <strong>{damagedCookie.name}</strong>
                                     {' dies'}
                                 </>
                             ) : (
                                 <>
                                     {', '}
-                                    <strong>{currentCookie.name}</strong>
+                                    <strong>{damagedCookie.name}</strong>
                                     {' survives'}
                                 </>
                             )}
                         </>
                     );
 
-                    if (currentCookie.health <= 0) {
-                        currentCookie.isAlive = false;
-                        const index = cookieArray.findIndex(cookie => cookie.name === currentCookie.name);
+                    if (damagedCookie.health <= 0) {
+                        damagedCookie.isAlive = false;
+                        const index = cookieArray.findIndex(cookie => cookie.name === damagedCookie.name);
                         if (index !== -1) {
                             cookieArray.splice(index, 1);
                         }
@@ -442,8 +447,8 @@ function Bloodbath({ cookies }: ReapingProps): React.ReactElement { // Define Bl
                     setOutput(prevResults => [
                         ...prevResults,
                         {
-                            Cookie1: damagingCookie.picture,
-                            Cookie2: currentCookie.picture,
+                            Cookie1: currentCookie.picture,
+                            Cookie2: damagedCookie.picture,
                             result: result
                         }
                     ]);
