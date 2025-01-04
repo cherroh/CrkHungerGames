@@ -17,7 +17,7 @@ function App(): React.ReactElement {
     window.location.reload();
   }
 
-  //clicking the "begin simulation" button takes the user to the next place: the bloodbath
+  //clicking the "begin simulation" button takes the user to the next place, the bloodbath
   function beginSimulation(): void {
     setPhase('bloodbath');
   }
