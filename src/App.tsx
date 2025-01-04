@@ -38,85 +38,55 @@ function App(): React.ReactElement {
       {phase === 'reaping' && <button onClick={beginSimulation} className="proceed-button">Proceed</button>}
       {phase === 'reaping' && (
         <div className="info-box">
-          <p> {/*this long wall of text is the description of the website, it teaches them how to use it, it also displays extra information*/}
-            Alright, if you wanna use this hunger games simulator, keep this in mind:<br />
-            <br />
-            - I am bad at making this kind of stuff<br />
-            <br />
-            - There is a chance that the simulator crashes when it runs,<br />
-            if that happens, just leave and come back to the simulator.<br />
-            This happens if you give cookies too much health<br />
-            <br />
-            - This simulator is mostly for my personal use, but you all can use it if you want<br />
-            <br />
-            - This simulator is better than the official one fr<br />
+          <p> {/*this teaches the user how to use the website*/}
+            <b>Introduction</b><br />
+            This website is an interactive text- and image-based simulation. It is customized and expands upon BrantSteele's Hunger Games simulator. 
+            This project started as a personal endeavor, but now it's available for you to try out if you're interested. 
+            Click the "Proceed" button if you don't want to customize your simulation.<br />
             <br />
             <br />
-            <br />
-            Ok, here's how to actually use it: <br />
-            <br />
-            No customization: click proceed, that's all<br />
-            <br />
-            With customization: use the input boxes to change tribute's values<br />
-            <br />
-            For the tribute's picture, you must put an imgur.com link into it<br />
-            <br />
-            You want to use the image's Direct Link<br />
-            <br />
-            For example: robust axe's image link is https://i.imgur.com/0EQfqJn.png<br />
-            <br />
-            You can either upload your own image to imgur.com or use someone else's<br />
-            <br />
-            The values you change will NOT save after you run the simulation, or when<br />
-            you reload the website<br />
-            <br />
-            Do not try to set the tribute's health or damage to 0 or below 0 or i will call u out<br />
+            <b>Warning</b><br />
+            If the simulator doesn't load after clicking the "Proceed" button, reload the website and try again. 
+            Avoid giving tributes excessive health, as it may cause the simulator to crash. <br />
             <br />
             <br />
-            <br />
-            How the simulator works:<br />
-            <br />
-            This simulator simulates the Hunger Games, where tributes kill eachother<br />
-            <br />
-            The last tribute standing wins<br />
-            <br />
-            The tribute's health stat determines how many hits the tribute can take<br />
-            <br />
-            It also determines how many accidents the tribute can get into before dying<br />
-            <br />
-            The tribute's attack stat determines how much damage they do to other tributes<br />
-            <br />
-            Tributes participate in events (like fights) very often, and most of these events<br />
-            DO have an impact on the simulation<br />
-            <br />
-            The tributes that participate in events are chosen randomly<br />
+            <b>How to customize your simulation</b><br />
+            Use the white input fields to change your tribute's attributes. 
+            To change a tribute's picture, first, upload an image to imgur.com. 
+            Next, you must copy the imgur.com link of your uploaded image and paste it into their picture input field. 
+            You want to copy and paste the image's "direct link" (not the "image link"). 
+            For example, a tribute's direct image link may look like this: https://i.imgur.com/0EQfqJn.png. 
+            The values you change will not save after you run the simulation, or when you reload the website.
+            Do not set the tribute's health or damage to 0 or negative values.<br />
             <br />
             <br />
+            <b>How the simulator works:</b><br />
+            This website simulates the Hunger Games, where 24 tributes fight, and the last one standing wins.
+            Tributes are frequently randomly chosen to engage in randomized events, such as duels, with most of these events playing a key role in determining the winner.
+            The tribute's health stat determines how many hits the tribute can take before being eliminated.
+            The tribute's attack stat determines how much damage they do to other tributes.<br />
             <br />
-            Possible Events (Daytime):<br />
             <br />
-            Duel (30% chance): Two tributes fight, one tribute hurts the other, they might or<br />
-            might not kill them<br />
+            <b>Possible Daytime Events:</b><br />
+            <br />
+            Duel (30% chance): Two tributes fight and one tribute hurts the other<br />
             <br />
             Find Weapon (10% chance): A tribute finds a weapon, it increases their damage<br />
             <br />
             Find Supplies (10% chance): A tribute finds supplies, it increases their health<br />
             <br />
-            Taunt (10% chance): One tribute taunts another tribute, this does absolutely nothing<br />
-            but its good for my videos<br />
+            Accident (20% chance): A tribute has an accident and loses health<br />
             <br />
-            Accident (20% chance): A tribute gets in an accident and hurts themself, they might die<br />
+            Steal (10% chance): A tribute steals from another tribute's belongings, lowering the victim's damage<br />
             <br />
-            Steal (10% chance): A tribute steals from another tribute's belongings, lowering their damage<br />
+            Taunt (10% chance): One tribute taunts another tribute, but doesn't impact the outcome of the simulation<br />
             <br />
-            Events that do nothing (10% chance): A tribute does something that has no impact on the simulation.<br />
-            Hey it makes things more realistic alright?<br />
+            Events that do nothing (10% chance): Neutral events that don't impact the outcome of the simulation<br />
             <br />
             <br />
+            <b>Possible Nighttime Events:</b><br />
             <br />
-            Possible Events (Nighttime):<br />
-            <br />
-            Sleep (10% chance): These are mostly nightmares, which makes things more realistic<br />
+            Sleep (10% chance): Tributes must sleep<br />
             <br />
             Duel (25% chance)<br />
             <br />
@@ -124,22 +94,22 @@ function App(): React.ReactElement {
             <br />
             Find Supplies (5% chance)<br />
             <br />
-            Taunt (10% chance)<br />
-            <br />
             Accident (15% chance)<br />
             <br />
             Steal (20% chance)<br />
             <br />
+            Taunt (10% chance)<br />
+            <br />
             Events that do nothing (10% chance)<br />
             <br />
             <br />
+            <b>Possible Bloodbath/Feast Events:</b><br />
             <br />
-            Possible Events (Bloodbath/Feast):<br />
+            Each tribute will experience one of these outcomes.
+            The bloodbath occurs once at the beginning of the simulation, just like in the Hunger Games. 
+            After the bloodbath, feasts occur about every 3 days.<br />
             <br />
-            Every single tribute will have one of these outcomes, if they don't die before it happens.<br />
-            Feasts occur about every 3 days<br />
-            <br />
-            Run Away (50% chance): The tribute escapes the event safely<br />
+            Run Away (50% chance): The tribute successfully escapes the event<br />
             <br />
             Find Supplies (16.6% chance)<br />
             <br />
@@ -148,13 +118,10 @@ function App(): React.ReactElement {
             Duel (16.6% chance)<br />
             <br />
             <br />
+            <b>Possible Events During The Final Showdown:</b><br />
             <br />
-            A Final Showdown occurs when there are only two tributes left<br />
-            <br />
-            During the final showdown, damage is halved, to make things more dramatic<br />
-            <br />
-            Possible Events (Final Showdown)<br />
-            <br />
+            The final showdown begins when there are only two tributes left. 
+            During the final showdown, damage is halved to heighten the drama.<br />
             <br />
             Duel (70% chance)<br />
             <br />
@@ -163,20 +130,14 @@ function App(): React.ReactElement {
             Taunt (15% chance)<br />
             <br />
             <br />
-            <br />
-            At the moment, all these probabilities aren't changeable<br />
-            <br />
+            Currently, all probabilities are unchangeable, but this may change in the future.<br />
             <br />
             <br />
-            Some extra information:<br />
+            <b>Credits:</b><br />
             <br />
             Original Simulator: <a href="https://brantsteele.net/hungergames/disclaimer.php">https://brantsteele.net/hungergames/disclaimer.php</a><br />
             <br />
             Author: cherrow<br />
-            <br />
-            <br />
-            <br />
-            Well that was a long wall of text
           </p>
         </div>
       )}
