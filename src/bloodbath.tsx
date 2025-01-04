@@ -145,7 +145,7 @@ function Bloodbath({ cookies }: ReapingProps): React.ReactElement { // Define Bl
         // Array of possible goof-off events
         const events = [
             "cries in their sleep",
-            "dreams about Frost Flop losing the Hunger Games",
+            "dreams about Frost Queen losing the Hunger Games",
             "dreams about the worst update of them all: the Triple Cone Cup",
             "dreams about the most pay-to-win update of them all: Stardust",
             "gets a rash due to their sleeping bag",
@@ -919,7 +919,7 @@ function Bloodbath({ cookies }: ReapingProps): React.ReactElement { // Define Bl
             "starts a fire but it spreads a bit too much",
             "lights the forest on fire for literally no good reason",
             "looks a bit green, due to an infection",
-            "thinks about how bad frost flop is",
+            "thinks about how bad frost queen is",
             "commits arson in the forest",
             "catches a fish, unfortunately it's fishgato"
         ];

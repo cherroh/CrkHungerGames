@@ -125,7 +125,7 @@ const cookie: CookieType[] = [
         weapon: "none"
     },
     {
-        name: "Sea Farty",
+        name: "Sea Fairy",
         isAlive: true,
         health: 90,
         damage: 60,
@@ -133,7 +133,7 @@ const cookie: CookieType[] = [
         weapon: "none"
     },
     {
-        name: "Frost Flop",
+        name: "Frost Queen",
         isAlive: true,
         health: 80,
         damage: 70,
@@ -149,7 +149,7 @@ const cookie: CookieType[] = [
         weapon: "none"
     },
     {
-        name: "Hollyflop",
+        name: "Hollyberry",
         isAlive: true,
         health: 150,
         damage: 50,
@@ -197,7 +197,7 @@ const cookie: CookieType[] = [
         weapon: "none"
     },
     {
-        name: "Eggliar",
+        name: "Egglair",
         isAlive: true,
         health: 90,
         damage: 40,
