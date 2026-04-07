@@ -1,47 +1,65 @@
 //ChangeCast.tsx generates the forms the user uses to change the default cookie array
 
-import React, { useState, ChangeEvent, FormEvent } from 'react';
+import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { CookieType } from './tributes';
+
+type CookieFormState = {
+    newName: string;
+    newHealth: string;
+    newDamage: string;
+    newPicture: string;
+};
 
 function ChangeCast({ cookies, setCookies }: { readonly cookies: CookieType[], readonly setCookies: React.Dispatch<React.SetStateAction<CookieType[]>> }) {
     //state that manages the forms
-    //it works because the user can only update 1 cookie at a time
-    const [cookieForms, setCookieForms] = useState(
+    const [cookieForms, setCookieForms] = useState<CookieFormState[]>(
         cookies.map((cookie) => ({
             newName: cookie.name,
-            newHealth: cookie.health,
-            newDamage: cookie.damage,
+            newHealth: String(cookie.health),
+            newDamage: String(cookie.damage),
             newPicture: cookie.picture
         }))
     );
+
+    useEffect(() => {
+        setCookieForms(
+            cookies.map((cookie) => ({
+                newName: cookie.name,
+                newHealth: String(cookie.health),
+                newDamage: String(cookie.damage),
+                newPicture: cookie.picture
+            }))
+        );
+    }, [cookies]);
 
     //function that handles the change in a cookie's property
     const handleUpdateCookie = (index: number) => {
         return () => {
             const updatedCookies = [...cookies];
-            const newHealth = cookieForms[index].newHealth;
-            const newDamage = cookieForms[index].newDamage;
+            const currentCookie = updatedCookies[index];
+            const newHealth = Number(cookieForms[index].newHealth);
+            const newDamage = Number(cookieForms[index].newDamage);
+            const updatedName = cookieForms[index].newName.trim() || currentCookie.name;
+            const updatedPicture = cookieForms[index].newPicture.trim() || currentCookie.picture;
 
             // Check if the new health and damage are not negative or zero
             if (newHealth > 0 && newDamage > 0) {
                 updatedCookies[index] = {
-                    ...updatedCookies[index],
-                    name: cookieForms[index].newName,
+                    ...currentCookie,
+                    name: updatedName,
                     health: newHealth,
                     damage: newDamage,
-                    picture: cookieForms[index].newPicture
+                    picture: updatedPicture
                 };
                 setCookies(updatedCookies);
             } else {
-                // If health or damage is negative or zero, do not update the corresponding property
-                // Call out the user for doing this
                 alert("New Values Rejected - Don't Try To Break The Game, Blud");
             }
         };
     };
 
     //function that handles the user's request to change a cookie's property
-    const handleInputChange = (index: number, field: string) => {
+    const handleInputChange = (index: number, field: keyof CookieFormState) => {
         return (e: ChangeEvent<HTMLInputElement>) => {
             const value = e.target.value;
             setCookieForms((prevCookieForms) => {

@@ -1,19 +1,29 @@
 //App.tsx is the homepage
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import cherrowlogo from './assets/cherrowlogo.jpg';
 import Reaping from './reaping';
 import Bloodbath from './bloodbath';
 import ChangeCast from './ChangeCast';
-import cookiesData from './tributes';
+import cookiesData, { CookieType } from './tributes';
+
+const LOCAL_STORAGE_KEY = 'crkg-hunger-games-cookies';
 
 function App(): React.ReactElement {
   const [phase, setPhase] = useState<'reaping' | 'bloodbath'>('reaping'); //Manage the state of the place the user is currently at
-  const [cookies, setCookies] = useState(cookiesData); // Manage the state of the cookies array
+  const [cookies, setCookies] = useState<CookieType[]>(() => {
+    const savedCookies = localStorage.getItem(LOCAL_STORAGE_KEY);
+    return savedCookies ? JSON.parse(savedCookies) as CookieType[] : cookiesData;
+  }); // Manage the state of the cookies array
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(cookies));
+  }, [cookies]);
 
   //clicking the reset button reloads the website, deleting all saved information and progress
   function resetAll(): void {
+    localStorage.removeItem(LOCAL_STORAGE_KEY);
     window.location.reload();
   }
 
@@ -56,7 +66,7 @@ function App(): React.ReactElement {
             Next, you must copy the imgur.com link of your uploaded image and paste it into their picture input field. 
             You want to copy and paste the image's "direct link" (not the "image link"). 
             For example, a tribute's direct image link may look like this: https://i.imgur.com/0EQfqJn.png. 
-            The values you change will not save after you run the simulation, or when you reload the website.
+            The values you change will now save in your browser and reappear when you reload the page.
             Do not set the tribute's health or damage to 0 or negative values.<br />
             <br />
             <br />
