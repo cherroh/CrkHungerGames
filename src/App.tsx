@@ -64,7 +64,7 @@ function App(): React.ReactElement {
           <div className="modal" onClick={(e) => e.stopPropagation()}>
             <button className="modal-close" onClick={() => setShowHelp(false)}>×</button>
             <div className="modal-content info-box">
-              <div className="modal-header">
+              <div className="modal-header help-modal-header">
                 <h2>Help</h2>
               </div>
               <p>
@@ -175,11 +175,15 @@ function App(): React.ReactElement {
 
       {showCustomize && (
         <div className="modal-overlay" onClick={() => setShowCustomize(false)}>
-          <div className="modal large" onClick={(e) => e.stopPropagation()}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
             <button className="modal-close" onClick={() => setShowCustomize(false)}>×</button>
-            <h2 className="modal-title">Customize Tributes</h2>
-            <div className="modal-body">
-              <ChangeCast cookies={cookies} setCookies={setCookies} />
+            <div className="modal-content">
+              <div className="modal-header">
+                <h2>Customize Tributes</h2>
+              </div>
+              <div className="modal-body">
+                <ChangeCast cookies={cookies} setCookies={setCookies} />
+              </div>
             </div>
           </div>
         </div>
