@@ -23,8 +23,13 @@ function App(): React.ReactElement {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(cookies));
   }, [cookies]);
 
-  //clicking the reset button reloads the website, deleting all saved information and progress
-  function resetAll(): void {
+  //clicking the reset simulation button reloads the website
+  function resetSimulation(): void {
+    window.location.reload();
+  }
+
+  //clicking the reset tributes button clears saved tributes and reloads
+  function resetTributes(): void {
     localStorage.removeItem(LOCAL_STORAGE_KEY);
     window.location.reload();
   }
@@ -40,8 +45,9 @@ function App(): React.ReactElement {
         <aside className="sidebar">
           <img src={cherrowlogo} alt="cherrow logo" className="logo" />
           <div className="sidebar-buttons">
-            <button onClick={resetAll} className="reset-button">Reset All</button>
+            <button onClick={resetSimulation} className="reset-button">Reset Simulation</button>
             <button onClick={() => setShowHelp(true)} className="secondary-button">Help</button>
+            {phase === 'reaping' && <button onClick={resetTributes} className="reset-button">Reset Tributes</button>}
             {phase === 'reaping' && <button onClick={() => setShowCustomize(true)} className="secondary-button">Customize Tributes</button>}
           </div>
         </aside>
