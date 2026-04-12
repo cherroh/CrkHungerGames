@@ -75,29 +75,31 @@ function App(): React.ReactElement {
               </div>
               <p>
                 <b>Introduction</b><br />
+                <br />
                 This website is an interactive text- and image-based simulation. It is customized and expands upon BrantSteele's Hunger Games simulator.
                 This project started as a personal endeavor, but now it's available for you to try out if you're interested.
                 Click the "Proceed" button if you don't want to customize your simulation.<br />
                 <br />
                 <br />
                 <b>Warning</b><br />
+                <br />
                 If the simulator doesn't load after clicking the "Proceed" button, reload the website and try again.
                 Avoid giving tributes excessive health, as it may cause the simulator to crash. <br />
                 <br />
                 <br />
-                <b>How to customize your simulation</b><br />
-                Use the white input fields to change your tribute's attributes.
-                To change a tribute's picture, you can use Imgur, Discord, or a wiki image URL.
-                For Imgur, upload an image and paste the direct image URL into the picture field.
-                For Discord, paste the direct CDN attachment URL, for example: https://cdn.discordapp.com/attachments/…/image.jpg.
-                For wiki images, use the direct file URL that ends in the image filename, not the revision page URL.
-                Example valid wiki URL: https://static.wikia.nocookie.net/cookierunkingdom/images/9/97/Cookie_eternal_sugar_card.png
-                Example invalid wiki URL: https://static.wikia.nocookie.net/cookierunkingdom/images/9/97/Cookie_eternal_sugar_card.png/revision/latest?cb=20250507013152
+                <b>How to customize your simulation</b><br /><br />
+                Use the white input fields to change your tribute's attributes.<br /><br />
+                To change a tribute's picture, you can use Imgur, Discord, or a wiki image URL.<br /><br />
+                For Imgur, upload an image and paste the direct image URL into the picture field.<br /><br />
+                For Discord, paste the direct CDN attachment URL, for example: https://cdn.discordapp.com/attachments/…/image.jpg.<br /><br />
+                For wiki images, use the direct file URL that ends in the image filename, not the revision page URL.<br /><br />
+                Example valid wiki URL: https://static.wikia.nocookie.net/cookierunkingdom/images/9/97/Cookie_eternal_sugar_card.png<br /><br />
+                Example invalid wiki URL: https://static.wikia.nocookie.net/cookierunkingdom/images/9/97/Cookie_eternal_sugar_card.png/revision/latest?cb=20250507013152<br /><br />
                 The values you change will now save in your browser and reappear when you reload the page.
                 Do not set the tribute's health or damage to 0 or negative values.<br />
                 <br />
                 <br />
-                <b>How the simulator works:</b><br />
+                <b>How the simulator works:</b><br /><br />
                 This website simulates the Hunger Games, where 24 tributes fight, and the last one standing wins.
                 Tributes are frequently randomly chosen to engage in randomized events, such as duels, with most of these events playing a key role in determining the winner.
                 The tribute's health stat determines how many hits the tribute can take before being eliminated.
