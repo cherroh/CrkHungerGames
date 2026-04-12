@@ -8,11 +8,11 @@ Try it here: https://cherroh.github.io/CrkHungerGames/
 
 Steps 1 through 3 only need to be performed once. Repeat steps 4 through 6 every time you want to run and end the project locally.
 1. Open your terminal and navigate to the folder where you want to download the project
-2. Clone the repository by running this command: `git clone https://github.com/cherroh/CrkHungerGames-Professional.git`
+2. Clone the repository by running this command: `git clone https://github.com/cherroh/CrkHungerGames.git`
 3. To install required dependencies, navigate to the project folder in your terminal and run `npm install`
 4. To start the development server, run `npm run dev`
-5. Press 'o' and hit Enter to open the project in your browser. If you need help with Vite, press 'h' and hit Enter.
-6. Press 'q' and hit Enter to stop the project.
+5. Click the IP link to open the project in your browser
+6. Close the browser tab and do "Ctrl + c" in the terminal to terminate the project
 
 # How the simulator works
 This website simulates the Hunger Games, where 24 tributes fight, and the last one standing wins. Tributes are frequently randomly chosen to engage in randomized events, such as duels, with most of these events playing a key role in determining the winner. The tribute's health stat determines how many hits the tribute can take before being eliminated. The tribute's attack stat determines how much damage they do to other tributes.
@@ -21,7 +21,15 @@ This website simulates the Hunger Games, where 24 tributes fight, and the last o
 If the simulator doesn't load after clicking the "Proceed" button, reload the website and try again. Avoid giving tributes excessive health, as it may cause the simulator to crash.
 
 ## How to customize your simulation
-Use the white input fields to change your tribute's attributes. To change a tribute's picture, first, upload an image to imgur.com. Next, you must copy the imgur.com link of your uploaded image and paste it into their picture input field. You want to copy and paste the image's "direct link" (not the "image link"). For example, a tribute's direct image link may look like this: https://i.imgur.com/0EQfqJn.png. The values you change will not save after you run the simulation, or when you reload the website. Do not set the tribute's health or damage to 0 or negative values.
+Use the white input fields to change your tribute's attributes. To change a tribute's picture, you can use Imgur, Discord, or a direct wiki image URL.
+
+- Imgur: upload an image and paste the direct image URL into the picture input field.
+- Discord: paste a direct CDN attachment URL such as `https://cdn.discordapp.com/attachments/.../image.jpg`.
+- Wiki images: use the direct image file URL that ends in the filename, not the revision page URL.
+  - Valid example: `https://static.wikia.nocookie.net/cookierunkingdom/images/9/97/Cookie_eternal_sugar_card.png`
+  - Invalid example: `https://static.wikia.nocookie.net/cookierunkingdom/images/9/97/Cookie_eternal_sugar_card.png/revision/latest?cb=20250507013152`
+
+The values you change will save in your browser and reappear when you reload the page. Do not set the tribute's health or damage to 0 or negative values.
 
 ## Possible Daytime Events
 - Duel (30% chance): Two tributes fight and one tribute hurts the other
