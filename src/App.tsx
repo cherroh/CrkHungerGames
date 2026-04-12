@@ -87,10 +87,12 @@ function App(): React.ReactElement {
                 <br />
                 <b>How to customize your simulation</b><br />
                 Use the white input fields to change your tribute's attributes.
-                To change a tribute's picture, first, upload an image to imgur.com.
-                Next, you must copy the imgur.com link of your uploaded image and paste it into their picture input field.
-                You want to copy and paste the image's "direct link" (not the "image link").
-                For example, a tribute's direct image link may look like this: https://i.imgur.com/0EQfqJn.png.
+                To change a tribute's picture, you can use Imgur, Discord, or a wiki image URL.
+                For Imgur, upload an image and paste the direct image URL into the picture field.
+                For Discord, paste the direct CDN attachment URL, for example: https://cdn.discordapp.com/attachments/…/image.jpg.
+                For wiki images, use the direct file URL that ends in the image filename, not the revision page URL.
+                Example valid wiki URL: https://static.wikia.nocookie.net/cookierunkingdom/images/9/97/Cookie_eternal_sugar_card.png
+                Example invalid wiki URL: https://static.wikia.nocookie.net/cookierunkingdom/images/9/97/Cookie_eternal_sugar_card.png/revision/latest?cb=20250507013152
                 The values you change will now save in your browser and reappear when you reload the page.
                 Do not set the tribute's health or damage to 0 or negative values.<br />
                 <br />
