@@ -9,6 +9,19 @@ interface ReapingProps {
     cookies: CookieType[]; // Define the prop type
 }
 
+function formatEventWithTarget(template: string, targetName: string): React.ReactNode {
+    const parts = template.split("{target}");
+    return (
+        <>
+            {parts.flatMap((part, index) =>
+                index === 0
+                    ? [part]
+                    : [<strong key={`target-${index}`}>{targetName}</strong>, part]
+            )}
+        </>
+    );
+}
+
 function Bloodbath({ cookies }: ReapingProps): React.ReactElement { // Define Bloodbath component
     const [cookieArray, setCookieArray] = useState(cookies); // Initialize state for cookie array
     const [simulationReady, setSimulationReady] = useState(true); // Initialize state for simulation readiness
@@ -387,10 +400,10 @@ function Bloodbath({ cookies }: ReapingProps): React.ReactElement { // Define Bl
 
                     damagedCookie.health -= currentCookie.damage;
 
-                    let eventMessage = "";
+                    let eventMessage: React.ReactNode = "";
                     if (!currentCookie.weapon || currentCookie.weapon === "none") {
                         const randomEventIndex = Math.floor(Math.random() * noWeaponEvents.length);
-                        eventMessage = noWeaponEvents[randomEventIndex].replace("{target}", damagedCookie.name);
+                        eventMessage = formatEventWithTarget(noWeaponEvents[randomEventIndex], damagedCookie.name);
                     } else {
                         let weaponClass: keyof typeof weaponClasses = "melee";
                         for (let key in weaponClasses) {
@@ -410,9 +423,10 @@ function Bloodbath({ cookies }: ReapingProps): React.ReactElement { // Define Bl
                         }
 
                         const randomEventIndex = Math.floor(Math.random() * eventArray.length);
-                        eventMessage = eventArray[randomEventIndex]
-                            .replace("{target}", damagedCookie.name)
-                            .replace("{weapon}", currentCookie.weapon);
+                        eventMessage = formatEventWithTarget(
+                            eventArray[randomEventIndex].replace("{weapon}", currentCookie.weapon),
+                            damagedCookie.name
+                        );
                     }
 
                     let result = (
@@ -550,10 +564,10 @@ function Bloodbath({ cookies }: ReapingProps): React.ReactElement { // Define Bl
 
         randomCookie2.health -= randomCookie1.damage; // Reduce health of the killed cookie by killer's damage
 
-        let eventMessage = "";
+        let eventMessage: React.ReactNode = "";
         if (!randomCookie1.weapon || randomCookie1.weapon === "none") {
             const randomEventIndex = Math.floor(Math.random() * noWeaponEvents.length);
-            eventMessage = noWeaponEvents[randomEventIndex].replace("{target}", randomCookie2.name);
+            eventMessage = formatEventWithTarget(noWeaponEvents[randomEventIndex], randomCookie2.name);
         } else {
             let weaponClass: keyof typeof weaponClasses = "melee"; // Explicit type declaration
             for (let key in weaponClasses) {
@@ -573,9 +587,10 @@ function Bloodbath({ cookies }: ReapingProps): React.ReactElement { // Define Bl
             }
 
             const randomEventIndex = Math.floor(Math.random() * eventArray.length);
-            eventMessage = eventArray[randomEventIndex]
-                .replace("{target}", randomCookie2.name)
-                .replace("{weapon}", randomCookie1.weapon);
+            eventMessage = formatEventWithTarget(
+                eventArray[randomEventIndex].replace("{weapon}", randomCookie1.weapon),
+                randomCookie2.name
+            );
         }
 
         let result = (
@@ -1008,10 +1023,10 @@ function Bloodbath({ cookies }: ReapingProps): React.ReactElement { // Define Bl
         let calculatedDamage: number = randomCookie1.damage / 2;
         randomCookie2.health -= calculatedDamage; // Reduce health of the killed cookie by killer's damage
 
-        let eventMessage = "";
+        let eventMessage: React.ReactNode = "";
         if (!randomCookie1.weapon || randomCookie1.weapon === "none") {
             const randomEventIndex = Math.floor(Math.random() * noWeaponEvents.length);
-            eventMessage = noWeaponEvents[randomEventIndex].replace("{target}", randomCookie2.name);
+            eventMessage = formatEventWithTarget(noWeaponEvents[randomEventIndex], randomCookie2.name);
         } else {
             let weaponClass: keyof typeof weaponClasses = "melee"; // Explicit type declaration
             for (let key in weaponClasses) {
@@ -1031,9 +1046,10 @@ function Bloodbath({ cookies }: ReapingProps): React.ReactElement { // Define Bl
             }
 
             const randomEventIndex = Math.floor(Math.random() * eventArray.length);
-            eventMessage = eventArray[randomEventIndex]
-                .replace("{target}", randomCookie2.name)
-                .replace("{weapon}", randomCookie1.weapon);
+            eventMessage = formatEventWithTarget(
+                eventArray[randomEventIndex].replace("{weapon}", randomCookie1.weapon),
+                randomCookie2.name
+            );
         }
 
         let result = (
